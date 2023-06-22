@@ -1,0 +1,26 @@
+.promo {
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #073042;
+    padding: 50px 70px 60px;
+    margin: 0 auto;
+}
+
+.promo__curl {
+    width: 722px;
+    height: 244px;
+    align-self: flex-end;
+}
+
+.promo__title {
+    font-style: normal;
+    font-weight: 400;
+    color: #FFF;
+    font-size: 40px;
+    line-height: 52px;
+    letter-spacing: -1.6px;
+    margin: 0;
+    max-width: 626px;
+}

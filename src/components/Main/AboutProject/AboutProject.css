@@ -1,0 +1,40 @@
+.about-project {
+    min-height: 608px;
+    margin: 110px 70px;
+}
+
+.about-project__title {
+    color: #000;
+    font-size: 22px;
+    letter-spacing: -0.88px;
+    font-weight: 400;
+}
+
+.about-project__subtitle {
+    font-size: 20px;
+    letter-spacing: -0.8px;
+    font-weight: 400;
+}
+
+.about-project__text {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.about-project__subtext {
+    color: #A0A0A0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+}
+
+.about-project__line {
+    max-width: 100%;
+    border: 1px solid black;
+}
+
+.about-project__wrapper {
+    display: flex;
+}

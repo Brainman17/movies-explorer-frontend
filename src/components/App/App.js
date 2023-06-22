@@ -10,7 +10,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
   return (
-    <div className="App">
+    <div className="page">
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />
