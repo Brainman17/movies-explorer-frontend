@@ -1,5 +1,6 @@
 .promo {
     min-height: 560px;
+    max-width: 1280px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
