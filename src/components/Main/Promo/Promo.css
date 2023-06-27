@@ -1,27 +1,65 @@
 .promo {
-    min-height: 560px;
-    max-width: 1280px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #073042;
-    padding: 50px 70px 60px;
-    margin: 0 auto;
+  height: 560px;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #073042;
+  padding: 50px 70px 60px;
+  margin: 0 auto;
 }
 
 .promo__curl {
-    width: 722px;
-    height: 244px;
-    align-self: flex-end;
+  width: 722px;
+  height: 244px;
+  align-self: flex-end;
+
 }
 
 .promo__title {
-    font-style: normal;
-    font-weight: 400;
-    color: #FFF;
-    font-size: 40px;
-    line-height: 52px;
-    letter-spacing: -1.6px;
-    margin: 0;
-    max-width: 626px;
+  font-style: normal;
+  font-weight: 400;
+  color: #fff;
+  font-size: 40px;
+  line-height: 52px;
+  letter-spacing: -1.6px;
+  margin: 0;
+  max-width: 626px;
+}
+
+@media screen and (max-width: 880px) {
+  .promo {
+    height: 768px;
+    padding: 0 44px 70px;
+  }
+
+  .promo__title {
+    align-self: center;
+    text-align: center;
+    width: 680px;
+    margin-top: 300px;
+  }
+
+  .promo__curl {
+    width: 680px;
+    height: 230px;
+    align-self: center;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .promo {
+    height: 630px;
+    padding: 0 0 40px;
+  }
+
+  .promo__title {
+    align-self: center;
+    text-align: center;
+    width: 300px;
+    margin-top: 183px;
+    font-size: 31px;
+    line-height: 39px;
+    letter-spacing: -1.24px;
+  }
 }
