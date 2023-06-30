@@ -1,0 +1,164 @@
+.search {
+  margin: 80px 70px 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1280px;
+}
+
+.search__line {
+  max-width: 1140px;
+  border: 1px solid #aaaaaa;
+  opacity: 0.20000000298023224;
+  margin: 83px 0 0;
+  flex-basis: 100%;
+}
+
+.search__box {
+  max-width: 903px;
+  justify-content: space-between;
+  flex-basis: 100%;
+  display: flex;
+  border-radius: 50px;
+  border: 1.5px solid rgba(170, 170, 170, 1);
+  height: 41px;
+  padding: 7px 7px 7px 22px;
+}
+
+.search__input-txt {
+  border: none;
+  outline: none;
+  max-width: 932px;
+  padding: 0;
+}
+
+.search__input-txt::placeholder {
+  color: #a0a0a0;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.search__input-txt:focus::placeholder {
+  color: white;
+}
+
+.search__btn {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 43px;
+  height: 40px;
+  background-color: #3456f3;
+  border-radius: 50%;
+}
+
+.search__btn:hover {
+  cursor: pointer;
+  opacity: 0.699999988079071;
+}
+
+.search__btn-arrow {
+  padding: auto;
+}
+
+.switch__title {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  margin: auto 0;
+}
+
+.switch {
+  display: flex;
+}
+
+.switch__box {
+  display: inline-block;
+  position: relative;
+  width: 36px;
+  height: 20px;
+  margin: auto 0 auto 14px;
+}
+
+.switch__input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.switch__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  background-color: #2be080;
+  transition: 0.4s;
+}
+
+.switch__slider::before {
+  content: "";
+  position: absolute;
+  cursor: pointer;
+  height: 10px;
+  width: 10px;
+  right: 4.5px;
+  bottom: 4.5px;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: 0.4s;
+}
+
+.switch__input:checked + .switch__slider::before {
+  background-color: #f5f5f5;
+}
+
+.switch__input:checked + .switch__slider {
+  background-color: #ebebeb;
+}
+
+.switch__input:checked + .switch__slider::before {
+  transform: translateX(-17px);
+}
+
+@media screen and (max-width: 1275px) {
+  .search {
+    flex-direction: column;
+  }
+
+  .search__box {
+    max-width: 100%;
+  }
+
+  .switch {
+    justify-content: center;
+    margin-top: 37px;
+  }
+
+  .switch__box {
+    margin: 0 0 0 12px;
+  }
+
+  .switch__title {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .search {
+    margin-top: 60px;
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .search {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

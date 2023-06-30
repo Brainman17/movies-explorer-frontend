@@ -21,7 +21,7 @@ function AboutMe() {
             в&nbsp;веб-разработку. А&nbsp;этот диплом как вишенка на&nbsp;торте
             моего прохождения курса от&nbsp;Я.Практикум.
           </p>
-          <p className="about-me__text">
+          <p className="about-me__caption">
             Github:
             <a href="https://github.com/Brainman17" className="about-me__link">
               https://github.com/Brainman17

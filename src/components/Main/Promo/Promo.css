@@ -1,5 +1,5 @@
 .promo {
-  height: 560px;
+  height: 452px;
   max-width: 1280px;
   display: flex;
   flex-direction: column;
@@ -13,7 +13,7 @@
   width: 722px;
   height: 244px;
   align-self: flex-end;
-
+  opacity: 0.699999988079071;
 }
 
 .promo__title {
@@ -29,7 +29,7 @@
 
 @media screen and (max-width: 880px) {
   .promo {
-    height: 768px;
+    height: 844px;
     padding: 0 44px 70px;
   }
 
@@ -49,7 +49,7 @@
 
 @media screen and (max-width: 540px) {
   .promo {
-    height: 630px;
+    height: 631px;
     padding: 0 0 40px;
   }
 
@@ -57,7 +57,7 @@
     align-self: center;
     text-align: center;
     width: 300px;
-    margin-top: 183px;
+    margin-top: 184px;
     font-size: 31px;
     line-height: 39px;
     letter-spacing: -1.24px;

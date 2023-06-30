@@ -20,7 +20,7 @@ function AboutProject() {
           <h3 className="about-project__subtitle">
             На&nbsp;выполнение диплома ушло 5&nbsp;недель
           </h3>
-          <p className="about-project__text">
+          <p className="about-project__text about-project__text-column-two">
             У&nbsp;каждого этапа был мягкий и&nbsp;жёсткий дедлайн, которые
             нужно было соблюдать, чтобы успешно защититься.
           </p>

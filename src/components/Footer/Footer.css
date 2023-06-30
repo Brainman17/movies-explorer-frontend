@@ -1,5 +1,5 @@
 .footer {
-    padding: 79px 70px 77px;
+    padding: 79px 70px 20px;
 }
 
 .footer__title {
@@ -30,4 +30,45 @@
 
 .footer__caption:last-child {
     padding-right: 0;
+}
+
+@media screen and (max-width: 880px) {
+  .footer {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .footer {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .footer__title {
+    font-size: 12px;
+    padding-bottom: 21px;
+    margin-bottom: 30px;
+  }
+
+  .footer__wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer__date {
+    font-size: 12px;
+    color: #A0A0A0;
+    order: 1;
+  }
+
+  .footer__caption {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .footer__caption:last-child {
+    margin-bottom: 30px;
+}
 }
