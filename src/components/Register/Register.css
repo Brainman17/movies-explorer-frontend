@@ -1,0 +1,133 @@
+.auth {
+  margin: 70px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth__logo {
+  width: 38px;
+  height: 38px;
+}
+
+.auth__title {
+  margin-top: 40px;
+  margin-bottom: 0;
+}
+
+.auth__form {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 396px;
+}
+
+.auth__input {
+  box-sizing: border-box;
+  font-size: 13px;
+  font-weight: 500;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  margin-top: 10px;
+  padding: 15px;
+  width: 396px;
+  margin-bottom: 20px;
+}
+
+.auth__input_password {
+  margin-bottom: 0;
+  color: #ff3055;
+}
+
+.auth__input-caption {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  color: #a0a0a0;
+  font-size: 10px;
+}
+
+.auth__btn {
+  all: unset;
+  cursor: pointer;
+  margin-top: 69px;
+  width: 100%;
+  align-self: center;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 15px;
+  background-color: #3456f3;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.auth__btn:hover {
+  opacity: 0.800000011920929;
+  transition: all 0.4s ease;
+}
+
+.auth__btn-caption {
+  text-align: center;
+  color: #a0a0a0;
+  font-size: 14px;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+.auth__btn-link {
+  text-decoration: none;
+  color: #3456f3;
+  font-size: 14px;
+}
+
+.auth__btn-link:hover {
+  opacity: 0.699999988079071;
+  cursor: pointer;
+}
+
+.auth__input-error {
+  padding-top: 10px;
+  color: #ff3055;
+  font-size: 10px;
+}
+
+@media screen and (max-width: 880px) {
+  .auth {
+    margin-top: 232px;
+    margin-bottom: 232px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .auth {
+    margin: 56px 30px 30px;
+  }
+  .auth__form {
+    margin-top: 80px;
+    width: 100%;
+  }
+  .auth__title {
+    margin-top: 50px;
+    align-self: center;
+  }
+  .auth__input {
+    width: 100%;
+  }
+  .auth__btn {
+    margin-top: 157px;
+    font-size: 12px;
+  }
+  .auth__btn-caption {
+    font-size: 12px;
+    margin-top: 14px;
+  }
+  .auth__btn-link {
+    font-size: 12px;
+  }
+  .auth__logo {
+    align-self: center;
+  }
+}

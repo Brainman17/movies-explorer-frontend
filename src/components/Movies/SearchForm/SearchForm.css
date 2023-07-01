@@ -20,7 +20,7 @@
   flex-basis: 100%;
   display: flex;
   border-radius: 50px;
-  border: 1.5px solid rgba(170, 170, 170, 1);
+  border: 1.5px solid rgba(170, 170, 170, 0.20000000298023224);
   height: 41px;
   padding: 7px 7px 7px 22px;
 }
@@ -38,8 +38,9 @@
   line-height: 18px;
 }
 
+
 .search__input-txt:focus::placeholder {
-  color: white;
+  color: #a0a0a0;
 }
 
 .search__btn {
@@ -154,11 +155,19 @@
     margin-left: 30px;
     margin-right: 30px;
   }
+
+  .search__line {
+    margin-top: 57px;
+  }
 }
 
 @media screen and (max-width: 540px) {
   .search {
     margin-left: 10px;
     margin-right: 10px;
+  }
+
+  .search__line {
+    margin-top: 44px;
   }
 }

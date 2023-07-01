@@ -4,7 +4,7 @@ import searchArrow from "../../../images/search-arrow.svg";
 
 function SearchForm() {
   return (
-    <div className="search">
+    <section className="search">
       <form className="search__box">
         <input className="search__input-txt" placeholder="Фильм" type="text" />
         <button className="search__btn">
@@ -23,7 +23,7 @@ function SearchForm() {
         </label>
       </div>
       <hr className="search__line"></hr>
-    </div>
+    </section>
   );
 }
 

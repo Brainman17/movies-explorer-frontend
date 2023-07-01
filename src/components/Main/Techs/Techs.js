@@ -13,13 +13,27 @@ function Techs() {
           применили в&nbsp;дипломном проекте.
         </p>
         <ul className="techs__list">
-          <li className="techs__list-cell"><p className="techs__list-cell-text">HTML</p></li>
-          <li className="techs__list-cell"><p className="techs__list-cell-text">CSS</p></li>
-          <li className="techs__list-cell"><p className="techs__list-cell-text">JS</p></li>
-          <li className="techs__list-cell"><p className="techs__list-cell-text">React</p></li>
-          <li className="techs__list-cell"><p className="techs__list-cell-text">Git</p></li>
-          <li className="techs__list-cell"><p className="techs__list-cell-text">Express.js</p></li>
-          <li className="techs__list-cell"><p className="techs__list-cell-text">mongoDB</p></li>
+          <li className="techs__list-cell">
+            <p className="techs__list-cell-text">HTML</p>
+          </li>
+          <li className="techs__list-cell">
+            <p className="techs__list-cell-text">CSS</p>
+          </li>
+          <li className="techs__list-cell">
+            <p className="techs__list-cell-text">JS</p>
+          </li>
+          <li className="techs__list-cell">
+            <p className="techs__list-cell-text">React</p>
+          </li>
+          <li className="techs__list-cell">
+            <p className="techs__list-cell-text">Git</p>
+          </li>
+          <li className="techs__list-cell">
+            <p className="techs__list-cell-text">Express.js</p>
+          </li>
+          <li className="techs__list-cell">
+            <p className="techs__list-cell-text">mongoDB</p>
+          </li>
         </ul>
       </div>
     </section>

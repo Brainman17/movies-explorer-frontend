@@ -20,18 +20,6 @@
   object-fit: cover;
 }
 
-.header__wrapper {
-  display: flex;
-  justify-content: space-between;
-  width: 1058px;
-  padding-left: 44px;
-  flex-basis: 100%;
-}
-
-.header__wrapper-movies {
-  display: flex;
-}
-
 .header__main-page {
   display: none;
   text-decoration: none;
@@ -52,6 +40,10 @@
   margin-right: 16px;
 }
 
+.header__movies:hover {
+  opacity: 0.69999;
+}
+
 .header__saved-movies {
   text-decoration: none;
   color: #000;
@@ -61,14 +53,23 @@
   line-height: 18px;
 }
 
+.header__saved-movies:hover {
+  opacity: 0.69999;
+}
+
 .header__btn-account {
   all: unset;
+  cursor: pointer;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
   border-radius: 50px;
   border: 2px solid rgba(170, 170, 170, 0.20000000298023224);
   padding: 8px 12px;
+}
+
+.header__btn-account:hover {
+  opacity: .75;
 }
 
 .header__icon-account {
@@ -106,13 +107,29 @@
 }
 
 .header__icon-btn {
-  all:unset;
+  all: unset;
   cursor: pointer;
   display: none;
 }
 
 .header__icon-btn:hover {
   opacity: 0.699999988079071;
+}
+
+.header__wrapper {
+  display: flex;
+  padding-left: 44px;
+  flex-basis: 100%;
+}
+
+.header__wrapper-movies {
+  display: flex;
+}
+
+.header__wrapper-menu {
+  display: flex;
+  justify-content: space-between;
+  flex-basis: 100%;
 }
 
 @media screen and (max-width: 880px) {
@@ -128,27 +145,11 @@
     position: absolute;
     cursor: pointer;
     top: 35px;
-    right: 38px;
+    right: 14px;
     z-index: 5;
   }
 
-  .header__main-page {
-    display: block;
-    font-size: 18px;  
-    margin-bottom: 28px;
-  }
-
-  .header__movies {
-    font-size: 18px; 
-    margin-right: 0;
-    margin-bottom: 28px;
-  }
-
-  .header__saved-movies {
-    font-size: 18px;
-  }
-
-  .header__wrapper {
+  .header__wrapper-menu {
     flex-direction: column;
     justify-content: space-between;
     position: fixed;
@@ -163,8 +164,24 @@
     transition: right 1s;
   }
 
-  .header__wrapper_active {
+  .header__wrapper-menu_active {
     right: 0;
+  }
+
+  .header__main-page {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 28px;
+  }
+
+  .header__movies {
+    font-size: 18px;
+    margin-right: 0;
+    margin-bottom: 28px;
+  }
+
+  .header__saved-movies {
+    font-size: 18px;
   }
 
   .header__wrapper-movies {
@@ -191,5 +208,9 @@
   .header__btn-signin {
     margin-left: 14px;
     padding: 5px 12px;
+  }
+
+  .header__wrapper-menu {
+    width: 100%;
   }
 }
