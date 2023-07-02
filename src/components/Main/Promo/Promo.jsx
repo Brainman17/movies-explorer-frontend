@@ -1,6 +1,6 @@
 import React from "react";
-import curl from "../../../images/curl.svg";
 import "./Promo.css";
+// import curl from "../../../images/text__COLOR_landing-logo.svg";
 
 function Promo() {
   return (
@@ -8,7 +8,7 @@ function Promo() {
       <h1 className="promo__title">
         Учебный проект студента факультета Веб-разработки.
       </h1>
-      <img src={curl} alt="Завитушка" className="promo__curl" />
+      {/* <img src={curl} alt="Завитушка" className="promo__curl" /> */}
     </section>
   );
 }

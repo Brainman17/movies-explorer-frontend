@@ -13,6 +13,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  text-decoration: none;
+  color: #000;
 }
 
 .portfolio__site-name {
@@ -24,16 +26,12 @@
   padding-bottom: 20px;
   margin-bottom: 20px;
   border-bottom: 1px solid #e8e8e8;
+  font-weight: 400;
 }
 
 .portfolio__arrow {
   margin-bottom: 25px;
   object-fit: contain;
-}
-
-.portfolio__arrow:hover {
-  cursor: pointer;
-  opacity: 0.699999988079071;
 }
 
 @media screen and (max-width: 880px) {

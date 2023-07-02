@@ -51,7 +51,6 @@
 .auth__btn {
   all: unset;
   cursor: pointer;
-  margin-top: 69px;
   width: 100%;
   align-self: center;
   color: #fff;
@@ -62,6 +61,14 @@
   background-color: #3456f3;
   border-radius: 3px;
   box-sizing: border-box;
+}
+
+.auth__btn_type_sign-in {
+  margin-top: 179px;
+}
+
+.auth__btn_type_sign-up {
+  margin-top: 69px;
 }
 
 .auth__btn:hover {
@@ -118,8 +125,13 @@
     width: 100%;
   }
   .auth__btn {
-    margin-top: 157px;
     font-size: 12px;
+  }
+  .auth__btn_type_sign-in {
+    margin-top: 267px;
+  }
+  .auth__btn_type_sign-up {
+    margin-top: 157px;
   }
   .auth__btn-caption {
     font-size: 12px;

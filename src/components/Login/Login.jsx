@@ -36,7 +36,7 @@ function Login() {
         <button
           type="submit"
           aria-label="Кнопка регистрации"
-          className="auth__btn"
+          className="auth__btn auth__btn_type_sign-in"
         >
           Войти
         </button>

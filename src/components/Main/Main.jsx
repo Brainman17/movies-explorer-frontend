@@ -13,11 +13,11 @@ function Main() {
     <>
       <Header />
       <main className="main">
-        <Promo />
-        <AboutProject />
+         <Promo />
+        {/* <AboutProject />
         <Techs />
         <AboutMe />
-        <Portfolio />
+        <Portfolio />  */}
       </main>
       <Footer />
     </>
