@@ -37,7 +37,7 @@ function Header() {
                 <li className="header__menu-list">
                   <NavLink
                     to="/movies"
-                    className="header__menu-title header__movies"
+                    className={`header__menu-title header__movies ${location.pathname === "/movies" ? 'header__movies_theme_dark' : ''}`}
                   >
                     Фильмы
                   </NavLink>
@@ -45,7 +45,7 @@ function Header() {
                 <li className="header__menu-list">
                   <NavLink
                     to="/saved-movies"
-                    className="header__menu-title header__saved-movies"
+                    className={`header__menu-title header__saved-movies ${location.pathname === "/saved-movies" ? 'header__movies_theme_dark' : ''}`}
                   >
                     Сохранённые фильмы
                   </NavLink>

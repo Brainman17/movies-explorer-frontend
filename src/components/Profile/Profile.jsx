@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../Header/Header";
 import "./Profile.css";
+import { Link } from "react-router-dom";
 
 function Profile() {
   return (
@@ -16,8 +17,8 @@ function Profile() {
           <h3 className="profile__title-name">E-mail</h3>
           <p className="profile__name">yandex.ru</p>
         </div>
-        <button className="profile__btn-edit">Редактировать</button>
-        <button className="profile__btn-out">Выйти из аккаунта</button>
+        <Link to="/movies" className="profile__btn-edit">Редактировать</Link>
+        <Link to="/sign-in" className="profile__btn-out">Выйти из аккаунта</Link>
       </section>
     </>
   );
