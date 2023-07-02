@@ -21,7 +21,6 @@
   display: flex;
   border-radius: 50px;
   border: 1.5px solid rgba(170, 170, 170, 0.20000000298023224);
-  height: 41px;
   padding: 7px 7px 7px 22px;
 }
 
@@ -38,7 +37,6 @@
   line-height: 18px;
 }
 
-
 .search__input-txt:focus::placeholder {
   color: #a0a0a0;
 }
@@ -48,8 +46,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 43px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   background-color: #3456f3;
   border-radius: 50%;
 }

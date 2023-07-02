@@ -61,6 +61,10 @@
   margin-right: 10px;
 }
 
+.techs__list-cell:hover {
+  background-color: #2BE080;
+}
+
 .techs__list-cell:last-child {
   margin-right: 0;
 }
@@ -100,6 +104,11 @@
   }
 
   .techs__list-cell {
+    width: 84px;
+    height: 57px;
+  }
+
+  .techs__list-cell:hover {
     width: 84px;
     height: 57px;
   }

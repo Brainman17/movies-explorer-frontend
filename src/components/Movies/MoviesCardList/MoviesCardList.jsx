@@ -12,12 +12,14 @@ import movie9 from "../../../images/movies/movie 3-3.jpg";
 import movie10 from "../../../images/movies/movie 4-1.jpg";
 import movie11 from "../../../images/movies/movie 4-2.jpg";
 import movie12 from "../../../images/movies/movie 4-3.jpg";
+import check from "../../../images/check.svg";
 
 function MoviesCardList() {
   return (
-    <div className="moviesCardList-wrapper">
+    <section className="moviesCardList-wrapper">
       <div className="moviesCardList">
         <article className="movieCard">
+          <button className="movieCard__btn movieCard__btn_type_save">Сохранить</button>
           <img
             src={movie1}
             alt="33 слов о дизайне"
@@ -51,6 +53,11 @@ function MoviesCardList() {
           </div>
         </article>
         <article className="movieCard">
+        <button className="movieCard__btn movieCard__btn_type_check"><img
+            src={check}
+            alt="Галочка"
+            className="movieCard__check"
+          /></button>
           <img
             src={movie4}
             alt="Баския: Взрыв реальности"
@@ -155,7 +162,7 @@ function MoviesCardList() {
         </article>
       </div>
       <button className="movieCard__btn-more">Ещё</button>
-    </div>
+    </section>
   );
 }
 

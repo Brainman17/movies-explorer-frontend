@@ -13,6 +13,30 @@
 }
 
 .movieCard {
+  position: relative;
+}
+
+.movieCard__btn {
+  all: unset;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+.movieCard__btn_type_save {
+  box-sizing: border-box;
+  font-weight: 400;
+  line-height: 9px;
+  font-size: 10px;
+  background-color: #fff;
+  padding: 7px 9px 6px;
+  border-radius: 30px;
+}
+
+.movieCard__btn_type_save:hover,
+.movieCard__btn_type_cross:hover {
+  cursor: pointer;
+  opacity: 0.85;
 }
 
 .movieCard__image {
@@ -97,5 +121,10 @@
     display: flex;
     justify-content: space-between;
     margin: 25px 0 0;
+  }
+
+  .movieCard__btn {
+    top: 10px;
+    right: 10px;
   }
 }

@@ -104,6 +104,7 @@
 @media screen and (max-width: 540px) {
   .auth {
     margin: 56px 30px 30px;
+    align-items: center;
   }
   .auth__form {
     margin-top: 80px;
@@ -126,8 +127,5 @@
   }
   .auth__btn-link {
     font-size: 12px;
-  }
-  .auth__logo {
-    align-self: center;
   }
 }
