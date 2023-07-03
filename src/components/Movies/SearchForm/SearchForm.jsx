@@ -6,7 +6,14 @@ function SearchForm() {
   return (
     <section className="search">
       <form className="search__box">
-        <input className="search__input-txt" placeholder="Фильм" type="text" required/>
+        <input
+          className="search__input-txt"
+          placeholder="Фильм"
+          type="text"
+          required
+          minLength="2"
+          maxLength="30"
+        />
         <button className="search__btn">
           <img
             src={searchArrow}
@@ -22,7 +29,7 @@ function SearchForm() {
           <span className="switch__slider"></span>
         </label>
       </div>
-      <hr className="search__line"></hr>
+      <hr className="search__line" />
     </section>
   );
 }

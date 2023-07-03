@@ -6,7 +6,7 @@ function AboutMe() {
   return (
     <section className="about-me">
       <h2 className="section__title">Студент</h2>
-      <hr className="section__line"></hr>
+      <hr className="section__line"/>
       <div className="about-me__wrapper">
         <div className="about-me__small-wrapper">
           <h3 className="about-me__title">Егор</h3>
@@ -33,7 +33,7 @@ function AboutMe() {
             src={MyPhoto}
             alt="Моя фотография"
             className="about-me__image"
-          ></img>
+          />
         </div>
       </div>
     </section>
