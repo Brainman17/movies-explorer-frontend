@@ -7,7 +7,6 @@
   background-color: #073042;
   padding: 50px 70px 60px;
   margin: 0 auto;
-  overflow:visible;
 }
 
 .promo__curl {
@@ -15,6 +14,7 @@
   height: 244px;
   align-self: flex-end;
   opacity: 0.699999988079071;
+  padding: 0;
 }
 
 .promo__title {
