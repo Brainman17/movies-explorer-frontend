@@ -1,8 +1,9 @@
 .profile {
-  margin: 47px auto 70px;
+  margin: 74px auto 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .profile__title {
@@ -12,20 +13,30 @@
 }
 
 .profile__wrapper {
+  padding-top: 123px;
+  padding-bottom: 220px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   width: 410px;
 }
 
+.profile__wrapper_type_edit {
+  margin-top: -3px;
+  margin-bottom: 3px;
+}
+
 .profile__wrapper-name {
-  margin-top: 123px;
+  display: flex;
+  justify-content: space-between;
   padding-bottom: 16px;
   margin-bottom: 18px;
   border-bottom: 1px solid #e8e8e8;
 }
 
-.profile__wrapper-email {
-  margin-bottom: 220px;
+.profile__wrapper-email { 
+  display: flex;
+  justify-content: space-between;
 }
 
 .profile__title-name {
@@ -77,17 +88,31 @@
   background-color: #3456f3;
   border-radius: 3px;
   box-sizing: border-box;
-  margin-top: -23px;
-}
-
-.profile_type_edit {
-  margin: auto;
-  max-width: 410px;
+  position: relative;
 }
 
 .profile__btn-save:hover {
   opacity: 0.800000011920929;
   transition: all 0.4s ease;
+}
+
+.profile__btn-save_disabled {
+  color: #C2C2C2;
+  background-color: #F8F8F8;
+}
+
+.profile__error {
+  display: none;
+  color: #FF004C;
+  font-size: 11px;
+  font-weight: 400;
+  position: absolute;
+  top: 404px;
+}
+
+.profile_type_edit {
+  margin: auto;
+  max-width: 410px;
 }
 
 @media screen and (max-width: 880px) {
@@ -96,12 +121,18 @@
     margin-bottom: 269px;
   }
 
-  .profile__wrapper-name {
-    margin-top: 96px;
+  .profile__wrapper {
+    padding-top: 96px;
+    padding-bottom: 210px;
   }
 
-  .profile__wrapper-email {
-    margin-bottom: 210px;
+  .profile__error {
+    top: 366px;
+  }
+
+  .profile__wrapper_type_edit {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
 
@@ -112,7 +143,6 @@
 
   .profile__btn-save {
     width: 260px;
-    margin-top: -156px;
   }
 
   .profile_type_edit {
@@ -127,13 +157,17 @@
 
   .profile__wrapper {
     width: 260px;
+    padding-top: 80px;
+    padding-bottom: 379px;
   }
 
-  .profile__wrapper-name {
-    margin-top: 80px;
+  .profile__error {
+    top: 522px;
+    font-size: 10px;
   }
 
-  .profile__wrapper-email {
-    margin-bottom: 379px;
+  .profile__wrapper_type_edit {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }

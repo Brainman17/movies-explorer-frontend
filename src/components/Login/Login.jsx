@@ -9,7 +9,7 @@ function Login() {
       <Link to="/">
         <img src={logo} alt="Логотип" className="auth__logo" />
       </Link>
-      <h2 className="auth__title">Добро пожаловать!</h2>
+      <h2 className="auth__title">Рады видеть!</h2>
       <form name="Регистрация" className="auth__form">
         <label className="auth__input-caption">
           E-mail
