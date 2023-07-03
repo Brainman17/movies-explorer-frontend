@@ -6,7 +6,7 @@ function SearchForm() {
   return (
     <section className="search">
       <form className="search__box">
-        <input className="search__input-txt" placeholder="Фильм" type="text" />
+        <input className="search__input-txt" placeholder="Фильм" type="text" required/>
         <button className="search__btn">
           <img
             src={searchArrow}

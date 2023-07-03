@@ -7,32 +7,32 @@ import cross from "../../../images/cross-card.svg";
 
 function SavedMoviesCardList() {
   return (
-    <div className="moviesCardList-wrapper">
-        <div className="moviesCardList">
-            <article className="movieCard">
-                <button className="movieCard__btn movieCard__btn_type_cross"><img src={cross} alt="Крестик"/></button>
-                <img src={movie1} alt="33 слов о дизайне" className="movieCard__image" />
-                <div className="movieCard__wrapper">    
-                    <p className="movieCard__caption">33 слова о дизайне</p>
-                    <time className="movieCard__time">1ч 17м</time>
+    <section className="card-list">
+        <div className="card-list__wrapper">
+            <article className="card">
+                <button className="card__btn card__btn_type_cross"><img src={cross} alt="Крестик"/></button>
+                <img src={movie1} alt="33 слов о дизайне" className="card__image" />
+                <div className="card__wrapper">    
+                    <p className="card__caption">33 слова о дизайне</p>
+                    <time className="card__time">1ч 17м</time>
                 </div>
             </article>
-            <article className="movieCard">
-                <img src={movie2} alt="Киноальманах «100 лет дизайна»" className="movieCard__image" />
-                <div className="movieCard__wrapper">    
-                    <p className="movieCard__caption">Киноальманах «100 лет дизайна»</p>
-                    <time className="movieCard__time">1ч 17м</time>
+            <article className="card">
+                <img src={movie2} alt="Киноальманах «100 лет дизайна»" className="card__image" />
+                <div className="card__wrapper">    
+                    <p className="card__caption">Киноальманах «100 лет дизайна»</p>
+                    <time className="card__time">1ч 17м</time>
                 </div>
             </article>
-            <article className="movieCard">
-                <img src={movie3} alt="В погоне за Бенкси" className="movieCard__image" />
-                <div className="movieCard__wrapper">    
-                    <p className="movieCard__caption">В погоне за Бенкси</p>
-                    <time className="movieCard__time">1ч 17м</time>
+            <article className="card">
+                <img src={movie3} alt="В погоне за Бенкси" className="card__image" />
+                <div className="card__wrapper">    
+                    <p className="card__caption">В погоне за Бенкси</p>
+                    <time className="card__time">1ч 17м</time>
                 </div>
             </article>
         </div>
-    </div>
+    </section>
   );
 }
 

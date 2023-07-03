@@ -16,152 +16,152 @@ import check from "../../../images/check.svg";
 
 function MoviesCardList() {
   return (
-    <section className="moviesCardList-wrapper">
-      <div className="moviesCardList">
-        <article className="movieCard">
-          <button className="movieCard__btn movieCard__btn_type_save">Сохранить</button>
+    <section className="card-list">
+      <div className="card-list__wrapper">
+        <article className="card">
+          <button className="card__btn card__btn_type_save">Сохранить</button>
           <img
             src={movie1}
             alt="33 слов о дизайне"
-            className="movieCard__image"
+            className="card__image"
           />
-          <div className="movieCard__wrapper">
-            <p className="movieCard__caption">33 слова о дизайне</p>
-            <time className="movieCard__time">1ч 17м</time>
+          <div className="card__wrapper">
+            <p className="card__caption">33 слова о дизайне</p>
+            <time className="card__time">1ч 17м</time>
           </div>
         </article>
-        <article className="movieCard">
+        <article className="card">
           <img
             src={movie2}
             alt="Киноальманах «100 лет дизайна»"
-            className="movieCard__image"
+            className="card__image"
           />
-          <div className="movieCard__wrapper">
-            <p className="movieCard__caption">Киноальманах «100 лет дизайна»</p>
-            <time className="movieCard__time">1ч 17м</time>
+          <div className="card__wrapper">
+            <p className="card__caption">Киноальманах «100 лет дизайна»</p>
+            <time className="card__time">1ч 17м</time>
           </div>
         </article>
-        <article className="movieCard">
+        <article className="card">
           <img
             src={movie3}
             alt="В погоне за Бенкси"
-            className="movieCard__image"
+            className="card__image"
           />
-          <div className="movieCard__wrapper">
-            <p className="movieCard__caption">В погоне за Бенкси</p>
-            <time className="movieCard__time">1ч 17м</time>
+          <div className="card__wrapper">
+            <p className="card__caption">В погоне за Бенкси</p>
+            <time className="card__time">1ч 17м</time>
           </div>
         </article>
-        <article className="movieCard">
-        <button className="movieCard__btn movieCard__btn_type_check"><img
+        <article className="card">
+        <button className="card__btn card__btn_type_check"><img
             src={check}
             alt="Галочка"
-            className="movieCard__check"
+            className="card__check"
           /></button>
           <img
             src={movie4}
             alt="Баския: Взрыв реальности"
-            className="movieCard__image"
+            className="card__image"
           />
-          <div className="movieCard__wrapper">
-            <p className="movieCard__caption">Баския: Взрыв реальности</p>
-            <time className="movieCard__time">1ч 17м</time>
+          <div className="card__wrapper">
+            <p className="card__caption">Баския: Взрыв реальности</p>
+            <time className="card__time">1ч 17м</time>
           </div>
         </article>
-        <article className="movieCard">
+        <article className="card">
           <img
             src={movie5}
             alt="Бег это свобода"
-            className="movieCard__image"
+            className="card__image"
           />
-          <div className="movieCard__wrapper">
-            <p className="movieCard__caption">Бег это свобода</p>
-            <time className="movieCard__time">1ч 17м</time>
+          <div className="card__wrapper">
+            <p className="card__caption">Бег это свобода</p>
+            <time className="card__time">1ч 17м</time>
           </div>
         </article>
-        <article className="movieCard">
-          <img src={movie6} alt="Книготорговцы" className="movieCard__image" />
-          <div className="movieCard__wrapper">
-            <p className="movieCard__caption">Книготорговцы</p>
-            <time className="movieCard__time">1ч 17м</time>
+        <article className="card">
+          <img src={movie6} alt="Книготорговцы" className="card__image" />
+          <div className="card__wrapper">
+            <p className="card__caption">Книготорговцы</p>
+            <time className="card__time">1ч 17м</time>
           </div>
         </article>
-        <article className="movieCard">
+        <article className="card">
           <img
             src={movie7}
             alt="Когда я думаю о Германии ночью"
-            className="movieCard__image"
+            className="card__image"
           />
-          <div className="movieCard__wrapper">
-            <p className="movieCard__caption">Когда я думаю о Германии ночью</p>
-            <time className="movieCard__time">1ч 17м</time>
+          <div className="card__wrapper">
+            <p className="card__caption">Когда я думаю о Германии ночью</p>
+            <time className="card__time">1ч 17м</time>
           </div>
         </article>
-        <article className="movieCard">
+        <article className="card">
           <img
             src={movie8}
             alt="Gimme Danger: История Игги и The Stooges"
-            className="movieCard__image"
+            className="card__image"
           />
-          <div className="movieCard__wrapper">
-            <p className="movieCard__caption">
+          <div className="card__wrapper">
+            <p className="card__caption">
               Gimme Danger: История Игги и The Stooges
             </p>
-            <time className="movieCard__time">1ч 17м</time>
+            <time className="card__time">1ч 17м</time>
           </div>
         </article>
-        <article className="movieCard">
+        <article className="card">
           <img
             src={movie9}
             alt="Дженис: Маленькая девочка грустит"
-            className="movieCard__image"
+            className="card__image"
           />
-          <div className="movieCard__wrapper">
-            <p className="movieCard__caption">
+          <div className="card__wrapper">
+            <p className="card__caption">
               Дженис: Маленькая девочка грустит
             </p>
-            <time className="movieCard__time">1ч 17м</time>
+            <time className="card__time">1ч 17м</time>
           </div>
         </article>
-        <article className="movieCard">
+        <article className="card">
           <img
             src={movie10}
             alt="Соберись перед прыжком"
-            className="movieCard__image"
+            className="card__image"
           />
-          <div className="movieCard__wrapper">
-            <p className="movieCard__caption">Соберись перед прыжком</p>
-            <time className="movieCard__time">1ч 17м</time>
+          <div className="card__wrapper">
+            <p className="card__caption">Соберись перед прыжком</p>
+            <time className="card__time">1ч 17м</time>
           </div>
         </article>
-        <article className="movieCard">
+        <article className="card">
           <img
             src={movie11}
             alt="Пи Джей Харви: A dog called money"
-            className="movieCard__image"
+            className="card__image"
           />
-          <div className="movieCard__wrapper">
-            <p className="movieCard__caption">
+          <div className="card__wrapper">
+            <p className="card__caption">
               Пи Джей Харви: A dog called money
             </p>
-            <time className="movieCard__time">1ч 17м</time>
+            <time className="card__time">1ч 17м</time>
           </div>
         </article>
-        <article className="movieCard">
+        <article className="card">
           <img
             src={movie12}
             alt="По волнам: Искусство звука в кино"
-            className="movieCard__image"
+            className="card__image"
           />
-          <div className="movieCard__wrapper">
-            <p className="movieCard__caption">
+          <div className="card__wrapper">
+            <p className="card__caption">
               По волнам: Искусство звука в кино
             </p>
-            <time className="movieCard__time">1ч 17м</time>
+            <time className="card__time">1ч 17м</time>
           </div>
         </article>
       </div>
-      <button className="movieCard__btn-more">Ещё</button>
+      <button className="card__btn-more">Ещё</button>
     </section>
   );
 }

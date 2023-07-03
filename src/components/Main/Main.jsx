@@ -14,10 +14,10 @@ function Main() {
       <Header />
       <main className="main">
          <Promo />
-        {/* <AboutProject />
+        <AboutProject />
         <Techs />
         <AboutMe />
-        <Portfolio />  */}
+        <Portfolio /> 
       </main>
       <Footer />
     </>
