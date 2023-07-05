@@ -41,7 +41,12 @@
 
 .card__image {
   width: 100%;
+  z-index: 10;
 }
+
+/* .card__image:hover {
+  filter: brightness(40%)
+} */
 
 .card__wrapper {
   display: flex;
@@ -52,7 +57,7 @@
 .card__caption {
   margin: 0;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .card__time {
@@ -67,6 +72,8 @@
   all: unset;
   width: 100%;
   display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
   height: 36px;
   text-align: center;
   border: none;

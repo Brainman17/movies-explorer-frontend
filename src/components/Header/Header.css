@@ -45,7 +45,7 @@
 }
 
 .header__movies_theme_dark {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .header__movies:hover {
@@ -169,7 +169,7 @@
   /* a */
   .header__menu-title {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
     position: relative;
   }
 

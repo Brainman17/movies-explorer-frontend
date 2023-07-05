@@ -42,7 +42,7 @@
 .profile__title-name {
   margin: 0;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .profile__name {
@@ -66,7 +66,7 @@
   all: unset;
   cursor: pointer;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   color: #ff3055;
   margin-top: 16px;
 }
