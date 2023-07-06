@@ -1,4 +1,4 @@
-# movies-explorer-api
+# movies-explorer-frontend
 Репозиторий для фронтенд-части приложения проекта `Movies-explorer`.
 
 Адрес репозитория: https://github.com/Brainman17/movies-explorer-frontend.git
