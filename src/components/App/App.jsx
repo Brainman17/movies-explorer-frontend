@@ -27,3 +27,5 @@ function App() {
 }
 
 export default App;
+
+// ssh jegor-andreychuk@158.160.110.88
