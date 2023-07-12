@@ -27,11 +27,6 @@ function Register({ onRegister }) {
     [onRegister, userData]
   );
 
-  // const {
-  //   register,
-  //   formState: { errors },
-  // } = useForm();
-
   return (
     <section className="auth">
       <Link to="/">
@@ -50,12 +45,8 @@ function Register({ onRegister }) {
             type="text"
             name="name"
             className="auth__input auth__input_name"
-            // {...register("name", {required: "Что-то пошло не так"})}
           />
         </label>
-        {/* <div style={{height: 20}}>
-          {errors?.name && <span>{errors?.name?.message}</span>}
-        </div> */}
         <label className="auth__input-caption">
           E-mail
           <input

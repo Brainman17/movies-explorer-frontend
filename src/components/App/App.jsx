@@ -18,7 +18,6 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 function App() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState({});
 
   const cbLogin = useCallback(async ({ email, password }) => {
@@ -34,8 +33,6 @@ function App() {
       }
     } catch (e) {
       console.error(e);
-    } finally {
-      setLoading(false);
     }
   }, []);
 
@@ -50,8 +47,6 @@ function App() {
       }
     } catch (e) {
       console.error(e);
-    } finally {
-      setLoading(false);
     }
   }, []);
 
@@ -70,8 +65,6 @@ function App() {
       navigate("/movies");
     } catch (e) {
       console.error(e);
-    } finally {
-      setLoading(false);
     }
   }, []);
 

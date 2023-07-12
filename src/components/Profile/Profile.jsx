@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import "./Profile.css";
 import { Link } from "react-router-dom";
 
-function Profile() {
+function Profile({ onLogout }) {
   return (
     <>
       <Header />
@@ -20,7 +20,7 @@ function Profile() {
           </div>
         </div>
         <Link to="/edit-profile" className="profile__btn-edit">Редактировать</Link>
-        <Link to="/sign-in" className="profile__btn-out">Выйти из аккаунта</Link>
+        <Link to="/sign-in" className="profile__btn-out" onClick={onLogout}>Выйти из аккаунта</Link>
       </section>
     </>
   );
