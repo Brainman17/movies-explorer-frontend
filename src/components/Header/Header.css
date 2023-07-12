@@ -44,7 +44,7 @@
   margin-right: 16px;
 }
 
-.header__movies_theme_dark {
+.header__movies_font_bold {
   font-weight: 500;
 }
 
@@ -83,6 +83,11 @@
 .header__icon-account {
   padding-right: 7px;
   margin-bottom: -1px;
+  color: #000;
+}
+
+.header__icon-account_theme_dark {
+  filter: brightness() invert(1);
 }
 
 .header__button {
@@ -144,6 +149,14 @@
 .header__menu-list {
   text-decoration: none;
   list-style: none;
+}
+
+.header__menu-title_theme_dark {
+  color: white;
+}
+
+.header__btn-account_theme_dark {
+  color: white;
 }
 
 @media screen and (max-width: 880px) {
