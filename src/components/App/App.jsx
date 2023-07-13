@@ -29,7 +29,7 @@ function App() {
       if (data.token !== undefined) {
         localStorage.setItem("jwt", data.token);
         setIsLoggedIn(true);
-        navigate("/movies");
+        navigate("/movies")
       }
     } catch (e) {
       console.error(e);
@@ -38,7 +38,6 @@ function App() {
 
   const cbRegister = useCallback(async ({ name, email, password }) => {
     const data = await mainApi.register(name, email, password);
-    console.log(data)
     try {
       if (!data.message) {
         navigate("/sign-in");
@@ -126,4 +125,4 @@ function App() {
 
 export default App;
 
-// ssh jegor-andreychuk@158.160.110.88
+// ssh jegor-andreychuk@62.84.126.169
