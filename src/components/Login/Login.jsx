@@ -1,42 +1,87 @@
 import React from "react";
-import "./Login.css";
+import { useForm } from "react-hook-form";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Login({ onLogin }) {
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+    reset,
+  } = useForm({
+    mode: "onChange",
+  });
+
+  const onSubmit = (data) => {
+    onLogin(data);
+    reset();
+  };
+
   return (
     <section className="auth">
       <Link to="/">
         <img src={logo} alt="Логотип" className="auth__logo" />
       </Link>
       <h2 className="auth__title">Рады видеть!</h2>
-      <form name="Регистрация" className="auth__form">
+      <form
+        name="Регистрация"
+        className="auth__form"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <label className="auth__input-caption">
           E-mail
           <input
-            required
-            minLength="2"
-            maxLength="30"
             type="text"
-            name="email"
-            className="auth__input auth__input_email"
+            {...register("email", {
+              required: "Поле 'E-mail' обязательно к заполнению!",
+              pattern: {
+                value: /^\S+@\S+\.\S+$/,
+                message: "Введите корректный email",
+              },
+            })}
+            className={`auth__input ${
+              errors.email ? "auth__input_color-red" : ""
+            }`}
           />
+          <div className={` ${errors.email ?  "auth__wrapper-error" : ""}`}>
+          {errors?.email && (
+            <span className="auth__input-error">{errors?.email?.message}</span>
+          )}
+          </div>
         </label>
         <label className="auth__input-caption">
           Пароль
           <input
-            required
-            minLength="2"
-            maxLength="30"
             type="password"
-            name="password"
-            className="auth__input auth__input_password"
+            {...register("password", {
+              required: "Поле 'Пароль' обязательно к заполнению!",
+              minLength: {
+                value: 4,
+                message: "Минимальная длина пароля 4 символа",
+              },
+              maxLength: {
+                value: 12,
+                message: "Максимальная длина пароля 12 символов",
+              },
+            })}
+            className={`auth__input ${
+              errors.password ? "auth__input_color-red" : ""
+            }`}
           />
+          <div className={` ${errors.password ?  "auth__wrapper-error" : ""}`}>
+          {errors?.password && (
+            <span className="auth__input-error">{errors?.password?.message}</span>
+          )}
+          </div>
         </label>
         <button
           type="submit"
           aria-label="Кнопка регистрации"
-          className="auth__btn auth__btn_type_sign-in"
+          className={`auth__btn auth__btn_type_sign-in ${
+            !isValid ? "auth__btn_type_disabled" : ""
+          }`}
+          disabled={!isValid}
         >
           Войти
         </button>
