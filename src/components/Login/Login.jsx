@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 
-function Login({ onLogin }) {
+function Login({ onLogin, loginError }) {
   const {
     register,
     formState: { errors, isValid },
@@ -44,10 +44,12 @@ function Login({ onLogin }) {
               errors.email ? "auth__input_color-red" : ""
             }`}
           />
-          <div className={` ${errors.email ?  "auth__wrapper-error" : ""}`}>
-          {errors?.email && (
-            <span className="auth__input-error">{errors?.email?.message}</span>
-          )}
+          <div className={` ${errors.email ? "auth__wrapper-error" : ""}`}>
+            {errors?.email && (
+              <span className="auth__input-error">
+                {errors?.email?.message}
+              </span>
+            )}
           </div>
         </label>
         <label className="auth__input-caption">
@@ -61,30 +63,35 @@ function Login({ onLogin }) {
                 message: "Минимальная длина пароля 4 символа",
               },
               maxLength: {
-                value: 12,
-                message: "Максимальная длина пароля 12 символов",
+                value: 30,
+                message: "Максимальная длина пароля 30 символов",
               },
             })}
             className={`auth__input ${
               errors.password ? "auth__input_color-red" : ""
             }`}
           />
-          <div className={` ${errors.password ?  "auth__wrapper-error" : ""}`}>
-          {errors?.password && (
-            <span className="auth__input-error">{errors?.password?.message}</span>
-          )}
+          <div className={` ${errors.password ? "auth__wrapper-error" : ""}`}>
+            {errors?.password && (
+              <span className="auth__input-error">
+                {errors?.password?.message}
+              </span>
+            )}
           </div>
         </label>
-        <button
-          type="submit"
-          aria-label="Кнопка регистрации"
-          className={`auth__btn auth__btn_type_sign-in ${
-            !isValid ? "auth__btn_type_disabled" : ""
-          }`}
-          disabled={!isValid}
-        >
-          Войти
-        </button>
+        <div className="auth__btn_type_sign-in">
+          <span className="auth__errors_type_sign-in">{loginError}</span>
+          <button
+            type="submit"
+            aria-label="Кнопка регистрации"
+            className={`auth__btn auth__btn_type_sign-in ${
+              !isValid ? "auth__btn_type_disabled" : ""
+            }`}
+            disabled={!isValid}
+          >
+            Войти
+          </button>
+        </div>
         <p className="auth__btn-caption">
           Ещё не зарегистрированы?
           <Link className="auth__btn-link" to="/sign-up">
