@@ -4,7 +4,7 @@ import "./Register.css";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 
-function Register({ onRegister }) {
+function Register({ onRegister, registerError }) {
   const {
     register,
     formState: { errors, isValid },
@@ -16,7 +16,6 @@ function Register({ onRegister }) {
 
   const onSubmit = (data) => {
     onRegister(data);
-    console.log(data)
     reset();
   };
 
@@ -46,17 +45,18 @@ function Register({ onRegister }) {
               },
               pattern: {
                 value: /^[а-яА-Яa-zA-ZЁёәіңғүұқөһӘІҢҒҮҰҚӨҺ\s-]*$/,
-                message: "Поле 'Имя' должно содержать только латиницу, кириллицу, пробел или дефис."
-              }
+                message:
+                  "Поле 'Имя' должно содержать только латиницу, кириллицу, пробел или дефис.",
+              },
             })}
             className={`auth__input ${
               errors.name ? "auth__input_color-red" : ""
             }`}
           />
-          <div className={` ${errors.name ?  "auth__wrapper-error" : ""}`}>
-          {errors?.name && (
-            <span className="auth__input-error">{errors?.name?.message}</span>
-          )}
+          <div className={` ${errors.name ? "auth__wrapper-error" : ""}`}>
+            {errors?.name && (
+              <span className="auth__input-error">{errors?.name?.message}</span>
+            )}
           </div>
         </label>
         <label className="auth__input-caption">
@@ -74,10 +74,12 @@ function Register({ onRegister }) {
             }`}
             type="text"
           />
-          <div className={` ${errors.email ?  "auth__wrapper-error" : ""}`}>
-          {errors?.email && (
-            <span className="auth__input-error">{errors?.email?.message}</span>
-          )}
+          <div className={` ${errors.email ? "auth__wrapper-error" : ""}`}>
+            {errors?.email && (
+              <span className="auth__input-error">
+                {errors?.email?.message}
+              </span>
+            )}
           </div>
         </label>
         <label className="auth__input-caption">
@@ -90,8 +92,8 @@ function Register({ onRegister }) {
                 message: "Минимальная длина пароля 4 символа",
               },
               maxLength: {
-                value: 12,
-                message: "Максимальная длина пароля 12 символов",
+                value: 30,
+                message: "Максимальная длина пароля 30 символов",
               },
             })}
             className={`auth__input ${
@@ -99,28 +101,31 @@ function Register({ onRegister }) {
             }`}
             type="password"
           />
-          <div className={` ${errors.password ?  "auth__wrapper-error" : ""}`}>
-          {errors?.password && (
-            <span className="auth__input-error">{errors?.password?.message}</span>
-          )}
+          <div className={` ${errors.password ? "auth__wrapper-error" : ""}`}>
+            {errors?.password && (
+              <span className="auth__input-error">
+                {errors?.password?.message}
+              </span>
+            )}
           </div>
         </label>
-        <button
-          type="submit"
-          aria-label="Кнопка регистрации"
-          className={`auth__btn auth__btn_type_sign-up ${
-            !isValid ? "auth__btn_type_disabled" : ""
-          }`}
-          disabled={!isValid}
-        >
-          Зарегистрироваться
-        </button>
-        <p className="auth__btn-caption">
-          Уже зарегистрированы?
-          <Link className="auth__btn-link" to="/sign-in">
-            &nbsp;Войти
-          </Link>
-        </p>
+        <div className="auth__btn_type_sign-up">
+          <span className="auth__errors_type_sign-up">{registerError}</span>
+          <button
+            type="submit"
+            aria-label="Кнопка регистрации"
+            className={`auth__btn ${!isValid ? "auth__btn_type_disabled" : ""}`}
+            disabled={!isValid}
+          >
+            Зарегистрироваться
+          </button>
+          <p className="auth__btn-caption">
+            Уже зарегистрированы?
+            <Link className="auth__btn-link" to="/sign-in">
+              &nbsp;Войти
+            </Link>
+          </p>
+        </div>
       </form>
     </section>
   );

@@ -18,7 +18,34 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 function App() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loginError, setLoginError] = useState('');
+  const [registerError, setRegisterError] = useState('');
   const [currentUser, setCurrentUser] = useState({});
+
+
+  const cbRegister = useCallback(async ({ name, email, password }) => {
+    const data = await mainApi.register(name, email, password);
+    try {
+      if (!data.message) {
+        navigate("/sign-in");
+      } else {
+        throw new Error(data.error);
+      }
+
+    } catch (e) {
+      console.error(e.message);
+      if (e === 'Ошибка:( 409') {
+        setRegisterError('Пользователь с таким email уже существует');
+      }
+      if (e === 'Ошибка:( 500') {
+        setRegisterError('Ошибка сервера');
+      }
+      else {
+        setRegisterError('При регистрации пользователя произошла ошибка');
+      }
+
+    }
+  }, []);
 
   const cbLogin = useCallback(async ({ email, password }) => {
     try {
@@ -33,19 +60,15 @@ function App() {
       }
     } catch (e) {
       console.error(e);
-    }
-  }, []);
-
-  const cbRegister = useCallback(async ({ name, email, password }) => {
-    const data = await mainApi.register(name, email, password);
-    try {
-      if (!data.message) {
-        navigate("/sign-in");
-      } else {
-        throw new Error(data.error);
+      if (e === "Ошибка:( 401") {
+        setLoginError('Неправильный логин или пароль');
       }
-    } catch (e) {
-      console.error(e);
+      if (e === 'Ошибка:( 500') {
+        setLoginError('Ошибка сервера');
+      }
+      else {
+        setLoginError('При авторизации пользователя произошла ошибка!');
+      }
     }
   }, []);
 
@@ -113,9 +136,9 @@ function App() {
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route
             path="/sign-up"
-            element={<Register onRegister={cbRegister} />}
+            element={<Register onRegister={cbRegister} registerError={registerError}/>}
           />
-          <Route path="/sign-in" element={<Login onLogin={cbLogin} />} />
+          <Route path="/sign-in" element={<Login onLogin={cbLogin} loginError={loginError}/>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
