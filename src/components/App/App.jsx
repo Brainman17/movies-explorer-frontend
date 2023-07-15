@@ -25,10 +25,10 @@ function App() {
   const cbRegister = useCallback(async ({ name, email, password }) => {
     const data = await mainApi.register(name, email, password);
     try {
-      if (!data.message) {
-        navigate("/sign-in");
-      } else {
+      if (!data) {
         throw new Error(data.error);
+      } else {
+        navigate("/sign-in");
       }
     } catch (e) {
       console.error(e);
