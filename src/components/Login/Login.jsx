@@ -84,7 +84,7 @@ function Login({ onLogin, loginError }) {
           <button
             type="submit"
             aria-label="Кнопка регистрации"
-            className={`auth__btn auth__btn_type_sign-in ${
+            className={`auth__btn ${
               !isValid ? "auth__btn_type_disabled" : ""
             }`}
             disabled={!isValid}

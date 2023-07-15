@@ -18,10 +18,9 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 function App() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loginError, setLoginError] = useState('');
-  const [registerError, setRegisterError] = useState('');
+  const [loginError, setLoginError] = useState("");
+  const [registerError, setRegisterError] = useState("");
   const [currentUser, setCurrentUser] = useState({});
-
 
   const cbRegister = useCallback(async ({ name, email, password }) => {
     const data = await mainApi.register(name, email, password);
@@ -31,19 +30,15 @@ function App() {
       } else {
         throw new Error(data.error);
       }
-
     } catch (e) {
-      console.error(e.message);
-      if (e === 'Ошибка:( 409') {
-        setRegisterError('Пользователь с таким email уже существует');
+      console.error(e);
+      if (e === "Ошибка:( 409") {
+        return setRegisterError("Пользователь с таким email уже существует");
+      } else {
+        return setRegisterError(
+          "При регистрации пользователя произошла ошибка"
+        );
       }
-      if (e === 'Ошибка:( 500') {
-        setRegisterError('Ошибка сервера');
-      }
-      else {
-        setRegisterError('При регистрации пользователя произошла ошибка');
-      }
-
     }
   }, []);
 
@@ -56,18 +51,14 @@ function App() {
       if (data.token !== undefined) {
         localStorage.setItem("jwt", data.token);
         setIsLoggedIn(true);
-        navigate("/movies")
+        navigate("/movies");
       }
     } catch (e) {
       console.error(e);
       if (e === "Ошибка:( 401") {
-        setLoginError('Неправильный логин или пароль');
-      }
-      if (e === 'Ошибка:( 500') {
-        setLoginError('Ошибка сервера');
-      }
-      else {
-        setLoginError('При авторизации пользователя произошла ошибка!');
+        return setLoginError("Неправильный логин или пароль");
+      } else {
+        return setLoginError("При авторизации пользователя произошла ошибка!");
       }
     }
   }, []);
@@ -103,7 +94,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header isLoggedIn={isLoggedIn}/>
+        <Header isLoggedIn={isLoggedIn} />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route
@@ -129,16 +120,21 @@ function App() {
             element={
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}
-                element={<Profile onLogout={cbLogout}/>}
+                element={<Profile onLogout={cbLogout} />}
               ></ProtectedRoute>
             }
           />
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route
             path="/sign-up"
-            element={<Register onRegister={cbRegister} registerError={registerError}/>}
+            element={
+              <Register onRegister={cbRegister} registerError={registerError} />
+            }
           />
-          <Route path="/sign-in" element={<Login onLogin={cbLogin} loginError={loginError}/>} />
+          <Route
+            path="/sign-in"
+            element={<Login onLogin={cbLogin} loginError={loginError} />}
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
