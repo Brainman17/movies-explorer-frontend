@@ -103,6 +103,15 @@
   opacity: 0.69;
 }
 
+.profile__error {
+  display: block;
+  margin-bottom: 10px;
+  color: #FF004C;
+  font-weight: 400;
+  font-size: 12px;
+  text-align: center;
+}
+
 .profile__btn-save {
   all: unset;
   cursor: pointer;
@@ -116,7 +125,6 @@
   background-color: #3456f3;
   border-radius: 3px;
   box-sizing: border-box;
-  position: relative;
 }
 
 .profile__btn-save:hover {
@@ -127,15 +135,6 @@
 .profile__btn-save_disabled {
   color: #C2C2C2;
   background-color: #F8F8F8;
-}
-
-.profile__error {
-  display: none;
-  color: #FF004C;
-  font-size: 11px;
-  font-weight: 400;
-  position: absolute;
-  top: 404px;
 }
 
 .profile_type_edit {

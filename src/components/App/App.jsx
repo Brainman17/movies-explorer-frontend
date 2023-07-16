@@ -58,9 +58,9 @@ function App() {
     } catch (e) {
       console.error(e);
       if (e === "Ошибка:( 401") {
-        return setLoginError("Неправильный логин или пароль");
+        return setLoginError("Вы ввели неправильный логин или пароль");
       } else {
-        return setLoginError("При авторизации пользователя произошла ошибка!");
+        return setLoginError("При авторизации произошла ошибка");
       }
     }
   }, []);
@@ -95,13 +95,21 @@ function App() {
     mainApi
       .patchUsers(name, email)
       .then((user) => {
-        setCurrentUser(user.data);
+        setCurrentUser(user.data.name, user.data.email);
         setIsLoggedIn(true);
         navigate("/profile");
-        setUpdateUserError("Все ок");
         console.log(user);
       })
-      .catch(e => e ? setUpdateUserError("Error") : "");
+      .catch((e) => {
+        console.error(e);
+        if (e === "Ошибка:( 409") {
+          return setUpdateUserError("Пользователь с таким email уже существует");
+        } else {
+          return setUpdateUserError(
+            "При обновлении профиля произошла ошибка"
+          );
+        }
+      });
   }
 
   return (
