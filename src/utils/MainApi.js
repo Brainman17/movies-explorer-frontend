@@ -33,14 +33,10 @@ class MainApi {
     }).then(this._checkResponse);
   };
 
-  getContent = (token) => {
-    return fetch(`${this._baseUrl}/movies`, {
+  getUser = () => {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: this.headers,
     }).then(this._checkResponse);
   };
 
@@ -65,13 +61,6 @@ class MainApi {
       headers: this._headers,
     }).then(this._checkResponse);
   };
-
-  getUser() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      method: "GET",
-      headers: this._headers,
-    }).then(this._checkResponse);
-  }
 
   patchUsers(name, email) {
     return fetch(`${this._baseUrl}/users/me`, {

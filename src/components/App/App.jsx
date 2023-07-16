@@ -23,6 +23,7 @@ function App() {
   const [loginError, setLoginError] = useState("");
   const [registerError, setRegisterError] = useState("");
   const [updateUserError, setUpdateUserError] = useState("");
+  const [movies, setMovies] = useState([]);
 
   const cbRegister = useCallback(async ({ name, email, password }) => {
     const data = await mainApi.register(name, email, password);
@@ -67,12 +68,9 @@ function App() {
 
   const cbTokenCheck = useCallback(async () => {
     try {
-      const jwt = localStorage.getItem("jwt");
-
-      const user = await mainApi.getContent(jwt);
-      if (!user) {
-        throw new Error("No User");
-      }
+      const user = await mainApi.getMovies();
+      console.log(user)
+      
       setCurrentUser(user);
       setIsLoggedIn(true);
       navigate(location);
