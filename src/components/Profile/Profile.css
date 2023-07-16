@@ -34,9 +34,20 @@
   border-bottom: 1px solid #e8e8e8;
 }
 
+.profile__wrapper-name:focus-within {
+  border-bottom: 1px solid rgba(52, 86, 243, 1);
+}
+
 .profile__wrapper-email { 
   display: flex;
   justify-content: space-between;
+  padding-bottom: 16px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.profile__wrapper-email:focus-within {
+  border-bottom: 1px solid rgba(52, 86, 243, 1);
 }
 
 .profile__title-name {
@@ -49,6 +60,23 @@
   margin: 0;
   font-size: 11px;
   font-weight: 400;
+}
+
+.profile__input {
+  border: none;
+  outline: none;
+  font-size: 13px;
+  font-weight: 400;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.profile__input-error {
+  color: #ff3055;
+  font-size: 10px;
+  text-align: right;
+  margin-bottom: 10px;
+  margin-top: -10px;
 }
 
 .profile__btn-edit {

@@ -8,7 +8,6 @@ function Profile({ onLogout }) {
 
   const currentUser = useContext(CurrentUserContext);
   
-
   return (
     <>
       <Header />

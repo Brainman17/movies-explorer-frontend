@@ -73,17 +73,20 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  patchUsers({ name, email }) {
+  patchUsers(name, email) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({ name: name, email: email }),
+      body: JSON.stringify({
+        name: name,
+        email: email,
+      }),
     }).then(this._checkResponse);
   }
 }
 
 const mainApi = new MainApi({
-  baseUrl: "https://api.ea.movies.explorer.nomoredomains.rocks",
+  baseUrl: "http://127.0.0.1:3005",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

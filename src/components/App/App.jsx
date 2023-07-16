@@ -22,7 +22,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loginError, setLoginError] = useState("");
   const [registerError, setRegisterError] = useState("");
-  const [profileMessage, setProfileMessage] = useState("");
+  const [updateUserError, setUpdateUserError] = useState("");
 
   const cbRegister = useCallback(async ({ name, email, password }) => {
     const data = await mainApi.register(name, email, password);
@@ -91,16 +91,17 @@ function App() {
     localStorage.removeItem("jwt");
   }, []);
 
-  function handleUpdateUser({ name, email }) {
+  function onUpdateUser({ name, email }) {
     mainApi
       .patchUsers(name, email)
       .then((user) => {
-        setCurrentUser(user);
-        setProfileMessage("Все ок");
+        setCurrentUser(user.data);
+        setIsLoggedIn(true);
+        navigate("/profile");
+        setUpdateUserError("Все ок");
+        console.log(user);
       })
-      .catch((e) => {
-        setProfileMessage("Ошибка");
-      });
+      .catch(e => e ? setUpdateUserError("Error") : "");
   }
 
   return (
@@ -132,14 +133,21 @@ function App() {
             element={
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}
-                element={<Profile onLogout={cbLogout} currentUser={currentUser}/>}
+                element={<Profile onLogout={cbLogout} />}
               ></ProtectedRoute>
             }
           />
           <Route
             path="/edit-profile"
             element={
-              <EditProfile
+              <ProtectedRoute
+                isLoggedIn={isLoggedIn}
+                element={
+                  <EditProfile
+                    updateUserError={updateUserError}
+                    onUpdateUser={onUpdateUser}
+                  />
+                }
               />
             }
           />
