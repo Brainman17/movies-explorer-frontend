@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 import mainApi from "../../utils/MainApi";
 import "./App.css";
@@ -17,10 +17,12 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
   const [loginError, setLoginError] = useState("");
   const [registerError, setRegisterError] = useState("");
-  const [currentUser, setCurrentUser] = useState({});
+  const [profileMessage, setProfileMessage] = useState("");
 
   const cbRegister = useCallback(async ({ name, email, password }) => {
     const data = await mainApi.register(name, email, password);
@@ -66,16 +68,14 @@ function App() {
   const cbTokenCheck = useCallback(async () => {
     try {
       const jwt = localStorage.getItem("jwt");
-      if (!jwt) {
-        return;
-      }
 
       const user = await mainApi.getContent(jwt);
       if (!user) {
         throw new Error("No User");
       }
+      setCurrentUser(user);
       setIsLoggedIn(true);
-      navigate("/movies");
+      navigate(location);
     } catch (e) {
       console.error(e);
     }
@@ -83,13 +83,25 @@ function App() {
 
   useEffect(() => {
     cbTokenCheck();
-  }, []);
+  }, [isLoggedIn]);
 
   const cbLogout = useCallback(() => {
     setIsLoggedIn(false);
     navigate("/sign-in");
     localStorage.removeItem("jwt");
   }, []);
+
+  function handleUpdateUser({ name, email }) {
+    mainApi
+      .patchUsers(name, email)
+      .then((user) => {
+        setCurrentUser(user);
+        setProfileMessage("Все ок");
+      })
+      .catch((e) => {
+        setProfileMessage("Ошибка");
+      });
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -120,11 +132,17 @@ function App() {
             element={
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}
-                element={<Profile onLogout={cbLogout} />}
+                element={<Profile onLogout={cbLogout} currentUser={currentUser}/>}
               ></ProtectedRoute>
             }
           />
-          <Route path="/edit-profile" element={<EditProfile />} />
+          <Route
+            path="/edit-profile"
+            element={
+              <EditProfile
+              />
+            }
+          />
           <Route
             path="/sign-up"
             element={
@@ -143,3 +161,5 @@ function App() {
 }
 
 export default App;
+
+//ssh jegor-andreychuk@62.84.126.169
