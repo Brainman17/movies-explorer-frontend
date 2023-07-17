@@ -26,8 +26,8 @@ function App() {
   const [movies, setMovies] = useState([]);
 
   const cbRegister = useCallback(async ({ name, email, password }) => {
-    const data = await mainApi.register(name, email, password);
     try {
+      const data = await mainApi.register(name, email, password);
       if (!data) {
         throw new Error(data.error);
       } else {
@@ -68,7 +68,7 @@ function App() {
 
   const cbTokenCheck = useCallback(async () => {
     try {
-      const user = await mainApi.getMovies();
+      const user = await mainApi.getUser();
       console.log(user)
       
       setCurrentUser(user);

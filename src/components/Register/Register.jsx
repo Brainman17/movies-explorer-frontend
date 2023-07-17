@@ -110,7 +110,7 @@ function Register({ onRegister, registerError }) {
           </div>
         </label>
         <div className="auth__btn_type_sign-up">
-          <span className="auth__errors_type_sign-up">Ошибка: {registerError}</span>
+          <span className="auth__errors_type_sign-up">{registerError}</span>
           <button
             type="submit"
             aria-label="Кнопка регистрации"
