@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 import mainApi from "../../utils/MainApi";
+import moviesApi from "../../utils/MoviesApi";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -18,12 +19,14 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+
+  // Серверные ошибки
   const [loginError, setLoginError] = useState("");
   const [registerError, setRegisterError] = useState("");
   const [updateUserError, setUpdateUserError] = useState("");
-  const [movies, setMovies] = useState([]);
 
   const cbRegister = useCallback(async ({ name, email, password }) => {
     try {
@@ -68,9 +71,13 @@ function App() {
 
   const cbTokenCheck = useCallback(async () => {
     try {
-      const user = await mainApi.getUser();
-      console.log(user)
-      
+      const jwt = localStorage.getItem("jwt");
+
+      if (!jwt) {
+        return;
+      }
+      const user = await mainApi.getUser(jwt);
+
       setCurrentUser(user);
       setIsLoggedIn(true);
       navigate(location);
@@ -93,19 +100,19 @@ function App() {
     mainApi
       .patchUsers(name, email)
       .then((user) => {
+        console.log(user)
         setCurrentUser(user.data.name, user.data.email);
         setIsLoggedIn(true);
         navigate("/profile");
-        console.log(user);
       })
       .catch((e) => {
         console.error(e);
         if (e === "Ошибка:( 409") {
-          return setUpdateUserError("Пользователь с таким email уже существует");
-        } else {
           return setUpdateUserError(
-            "При обновлении профиля произошла ошибка"
+            "Пользователь с таким email уже существует"
           );
+        } else {
+          return setUpdateUserError("При обновлении профиля произошла ошибка");
         }
       });
   }
@@ -121,7 +128,10 @@ function App() {
             element={
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}
-                element={<Movies />}
+                element={
+                  <Movies
+                />
+                }
               ></ProtectedRoute>
             }
           />
@@ -130,7 +140,11 @@ function App() {
             element={
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}
-                element={<SavedMovies />}
+                element={
+                  <SavedMovies
+
+                  />
+                }
               ></ProtectedRoute>
             }
           />

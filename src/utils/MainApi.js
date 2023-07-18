@@ -33,10 +33,14 @@ class MainApi {
     }).then(this._checkResponse);
   };
 
-  getUser = () => {
+  getUser = (jwt) => {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
-      headers: this.headers,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
     }).then(this._checkResponse);
   };
 
@@ -83,6 +87,6 @@ const mainApi = new MainApi({
   },
 });
 // "https://api.ea.movies.explorer.nomoredomains.rocks"
-// "http://127.0.0.1:3005"
+// "http://127.0.0.1:3004"
 
 export default mainApi;

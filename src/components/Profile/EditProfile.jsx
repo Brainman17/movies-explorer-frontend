@@ -21,8 +21,9 @@ function EditProfile({ onUpdateUser, updateUserError }) {
     },
   });
 
-  const onSubmit = (data) => {
-    onUpdateUser(data);
+  const onSubmit = ({ name, email }) => {
+    onUpdateUser({ name, email });
+    console.log({ name, email });
     reset();
   };
 
@@ -80,15 +81,15 @@ function EditProfile({ onUpdateUser, updateUserError }) {
               </span>
             )}
           </div>
-            <span className="profile__error">{updateUserError}</span>
-            <button
-              className={`profile__btn-save ${
-                !isValid ? "auth__btn_type_disabled" : ""
-              }`}
-              disabled={!isValid}
-            >
-              Сохранить
-            </button>
+          <span className="profile__error">{updateUserError}</span>
+          <button
+            className={`profile__btn-save ${
+              !isValid ? "auth__btn_type_disabled" : ""
+            }`}
+            disabled={!isValid}
+          >
+            Сохранить
+          </button>
         </form>
       </section>
     </>
