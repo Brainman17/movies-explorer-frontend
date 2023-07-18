@@ -100,6 +100,7 @@ function App() {
     mainApi
       .patchUsers(name, email)
       .then((user) => {
+        console.log(user.data.name, user.data.email)
         console.log(user)
         setCurrentUser(user.data.name, user.data.email);
         setIsLoggedIn(true);

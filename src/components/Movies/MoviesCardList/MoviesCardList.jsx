@@ -8,11 +8,11 @@ function MoviesCardList() {
 
   const handleMouseOver = () => {
     setIsHovering(true);
-  };
+  }
 
   const handleMouseOut = () => {
     setIsHovering(false);
-  };
+  }
 
   const list = arrayMovies.map((card) => (
     <article className="card">
