@@ -79,7 +79,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: "http://127.0.0.1:3004",
+  baseUrl: "https://api.ea.movies.explorer.nomoredomains.rocks",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
