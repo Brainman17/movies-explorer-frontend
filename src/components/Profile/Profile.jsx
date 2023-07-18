@@ -1,10 +1,10 @@
-import React, { useContext, memo  } from "react";
+import React, { useContext } from "react";
 import { CurrentUserContext } from "../../utils/contexts";
 import Header from "../Header/Header";
 import "./Profile.css";
 import { Link } from "react-router-dom";
 
-const Profile = memo(function Profile({ onLogout }) {
+function Profile({ onLogout }) {
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -28,6 +28,6 @@ const Profile = memo(function Profile({ onLogout }) {
       </section>
     </>
   );
-});
+};
 
 export default Profile;
