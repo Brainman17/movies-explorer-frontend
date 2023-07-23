@@ -23,7 +23,6 @@ function EditProfile({ onUpdateUser, updateUserError }) {
 
   const onSubmit = ({ name, email }) => {
     onUpdateUser({ name, email });
-    console.log({ name, email });
     reset();
   };
 

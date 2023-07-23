@@ -77,7 +77,6 @@ function App() {
         return;
       }
       const user = await mainApi.getUser(jwt);
-
       setCurrentUser(user);
       setIsLoggedIn(true);
       navigate(location);
@@ -96,27 +95,22 @@ function App() {
     localStorage.removeItem("jwt");
   }, []);
 
-  function onUpdateUser({ name, email }) {
-    mainApi
-      .patchUsers(name, email)
-      .then((user) => {
-        console.log(user.data.name, user.data.email)
-        console.log(user)
-        setCurrentUser(user.data.name, user.data.email);
-        setIsLoggedIn(true);
-        navigate("/profile");
-      })
-      .catch((e) => {
-        console.error(e);
-        if (e === "Ошибка:( 409") {
-          return setUpdateUserError(
-            "Пользователь с таким email уже существует"
-          );
-        } else {
-          return setUpdateUserError("При обновлении профиля произошла ошибка");
-        }
-      });
-  }
+  const onUpdateUser = useCallback(async ({ name, email }) => {
+    try {
+      const user = await mainApi.patchUsers(name, email);
+
+      setCurrentUser(user.data);
+      setIsLoggedIn(true);
+      navigate("/profile");
+    } catch (e) {
+      console.error(e);
+      if (e === "Ошибка:( 409") {
+        return setUpdateUserError("Пользователь с таким email уже существует");
+      } else {
+        return setUpdateUserError("При обновлении профиля произошла ошибка");
+      }
+    }
+  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -129,10 +123,7 @@ function App() {
             element={
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}
-                element={
-                  <Movies
-                />
-                }
+                element={<Movies />}
               ></ProtectedRoute>
             }
           />
@@ -141,11 +132,7 @@ function App() {
             element={
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}
-                element={
-                  <SavedMovies
-
-                  />
-                }
+                element={<SavedMovies />}
               ></ProtectedRoute>
             }
           />
@@ -191,4 +178,4 @@ function App() {
 
 export default App;
 
-//ssh jegor-andreychuk@62.84.126.169
+// ssh jegor-andreychuk@158.160.100.173

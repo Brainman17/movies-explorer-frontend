@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function Profile({ onLogout }) {
 
   const currentUser = useContext(CurrentUserContext);
-
+  
   return (
     <>
       <Header />

@@ -71,8 +71,8 @@ class MainApi {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        email: email,
+        name,
+        email,
       }),
     }).then(this._checkResponse);
   }
