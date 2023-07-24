@@ -95,7 +95,7 @@ function App() {
     localStorage.removeItem("jwt");
   }, []);
 
-  const onUpdateUser = useCallback(async ({ name, email }) => {
+  const cbUpdateUser = useCallback(async ({ name, email }) => {
     try {
       const user = await mainApi.patchUsers(name, email);
 
@@ -153,7 +153,7 @@ function App() {
                 element={
                   <EditProfile
                     updateUserError={updateUserError}
-                    onUpdateUser={onUpdateUser}
+                    onUpdateUser={cbUpdateUser}
                   />
                 }
               />
