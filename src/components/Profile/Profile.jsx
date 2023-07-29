@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 function Profile({ onLogout }) {
 
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
   
   return (
     <>
@@ -30,4 +30,4 @@ function Profile({ onLogout }) {
   );
 };
 
-export default Profile;
+export default React.memo(Profile);

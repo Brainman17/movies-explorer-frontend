@@ -1,48 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import "./MoviesCardList.css";
-import { arrayMovies } from "../../../utils/constants";
-// import check from "../../../images/check.svg";
+import CardItem from "../CardItem/CardItem";
+import { CurrentUserContext } from "../../../utils/contexts";
 
-function MoviesCardList() {
-  // const [isHovering, setIsHovering] = useState(false);
-
-  // const handleMouseOver = () => {
-  //   setIsHovering(true);
-  // }
-
-  // const handleMouseOut = () => {
-  //   setIsHovering(false);
-  // }
-
-  const list = arrayMovies.map((card) => (
-    <article className="card">
-      {/* {isHovering ? (
-        <button className="card__btn card__btn_type_save">Сохранить</button>
-      ) : (
-        ""
-      )} */}
-
-      {/* <button className="card__btn card__btn_type_check">
-        <img src={check} alt="Галочка" className="card__check" />
-      </button> */}
-      <button className="card__btn card__btn_type_save">Сохранить</button>
-      <img
-        src={card.image}
-        alt={card.title}
-        className="card__image"
-        // onMouseOver={handleMouseOver}
-        // onMouseOut={handleMouseOut}
-      />
-      <div className="card__wrapper">
-        <p className="card__caption">{card.title}</p>
-        <time className="card__time">{card.duration}</time>
-      </div>
-    </article>
-  ));
+function MoviesCardList({ toggle, pathname, onSaveMovie, onDeleteMovie }) {
+  const { filterMovies, filterSavedMovies } = useContext(CurrentUserContext);
+  
+  let isShortMovies = pathname === '/movies' ? toggle.toggleMovie : toggle.toggleSaveMovie;
+  let movies = pathname === '/movies' ? filterMovies : filterSavedMovies;
+  
+  
+  if(!isShortMovies) {
+    movies = movies.filter((movie) => movie.duration <= 40 )
+  }
 
   return (
     <section className="card-list">
-      <div className="card-list__wrapper">{list}</div>
+      <div className="card-list__wrapper">
+        { movies && movies.map((card) => {
+        return <CardItem card={card} onSaveMovie={onSaveMovie} onDeleteMovie={onDeleteMovie}/>})
+        }
+      </div>
       <button className="card__btn-more">Ещё</button>
     </section>
   );

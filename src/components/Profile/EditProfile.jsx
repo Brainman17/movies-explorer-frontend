@@ -6,7 +6,7 @@ import "./Profile.css";
 import "../Register/Register.css";
 
 function EditProfile({ onUpdateUser, updateUserError }) {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   const {
     register,

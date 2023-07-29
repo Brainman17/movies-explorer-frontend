@@ -7,7 +7,6 @@ import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
-import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import EditProfile from "../Profile/EditProfile";
 import Register from "../Register/Register";
@@ -27,6 +26,25 @@ function App() {
   const [loginError, setLoginError] = useState("");
   const [registerError, setRegisterError] = useState("");
   const [updateUserError, setUpdateUserError] = useState("");
+
+  const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+
+  const [filterMovies, setFilterMovies] = useState([]);
+  const [filterSavedMovies, setFilterSavedMovies] = useState([]);
+
+  useEffect(() => {
+    if (movies.length >= 0) {
+      setFilterMovies(movies);
+    }
+  }, [movies]);
+
+  useEffect(() => {
+    // TODO delete
+    if (savedMovies.length >= 0) {
+      setFilterSavedMovies(savedMovies);
+    }
+  }, [savedMovies]);
 
   const cbRegister = useCallback(async ({ name, email, password }) => {
     try {
@@ -69,21 +87,108 @@ function App() {
     }
   }, []);
 
-  const cbTokenCheck = useCallback(async () => {
-    try {
-      const jwt = localStorage.getItem("jwt");
-
-      if (!jwt) {
-        return;
-      }
-      const user = await mainApi.getUser(jwt);
-      setCurrentUser(user);
-      setIsLoggedIn(true);
-      navigate(location);
-    } catch (e) {
-      console.error(e);
+  const cbTokenCheck = useCallback(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (!jwt) {
+      return;
     }
+    mainApi
+      .getUser(jwt)
+      .then((user) => {
+        setCurrentUser(user);
+        setIsLoggedIn(true);
+        navigate(location);
+      })
+      .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    if (currentUser._id) {
+      const localSavedMovies = JSON.parse(
+        localStorage.getItem(`saveMovie_${currentUser._id}`)
+      );
+      const arrayMovies = [moviesApi.getMovies()];
+
+      if (!localSavedMovies) {
+        arrayMovies.push(mainApi.getMovies());
+      }
+      Promise.all(arrayMovies).then(([movies, saved]) => {
+        const savedMovies = !saved ? localSavedMovies : saved.data;
+        // console.log("savedMovies ", savedMovies);
+
+        const mySavedMovies = savedMovies.filter(
+          (movie) => movie.owner === currentUser._id
+        );
+        let newMovies = movies;
+        if (mySavedMovies) {
+          newMovies = movies.map((movie) => {
+            const currentMovie = mySavedMovies.find((savedMovie) => {
+              return savedMovie.movieId === movie.id;
+            });
+            if (currentMovie) {
+              movie._id = currentMovie._id;
+            }
+            return movie;
+          });
+        }
+        setMovies(newMovies);
+        setSavedMovies(mySavedMovies);
+      });
+    }
+  }, [currentUser]);
+
+  function handleSaveMovie(data) {
+    // console.log("data =>", data)
+    mainApi
+      .saveMovies(data)
+      .then(({ data: movie }) => {
+        setSavedMovies((prev) => {
+          const data = [movie, ...prev];
+          // console.log('data =>',data)
+          localStorage.setItem(
+            `saveMovie_${currentUser._id}`,
+            JSON.stringify(data)
+          );
+          return data;
+        });
+        setMovies((prev) =>
+          prev.map((item) => {
+            if (movie.movieId === item.id) {
+              item._id = movie._id;
+            }
+            return item;
+          })
+        );
+      })
+      .catch(console.error);
+  }
+
+  function handleDeleteMovie(id) {
+    mainApi
+      .deleteMovies(id)
+      .then(() => {
+        setSavedMovies((savedMovies) => {
+          const data = savedMovies.filter(
+            (savedMovie) => savedMovie._id !== id
+          );
+          localStorage.setItem(
+            `saveMovie_${currentUser._id}`,
+            JSON.stringify(data)
+          );
+          return data;
+        });
+        const newMovies = movies.map((item) => {
+          if (id === item._id) {
+            delete item._id;
+            return { ...item };
+          }
+          return item;
+        });
+        setMovies(newMovies);
+      })
+      .catch(console.error);
+  }
+
 
   useEffect(() => {
     cbTokenCheck();
@@ -113,7 +218,9 @@ function App() {
   }, []);
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider
+      value={{ movies, savedMovies, setFilterSavedMovies, setFilterMovies, currentUser, filterMovies, filterSavedMovies }}
+    >
       <div className="page">
         <Header isLoggedIn={isLoggedIn} />
         <Routes>
@@ -123,7 +230,13 @@ function App() {
             element={
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}
-                element={<Movies />}
+                element={
+                  <Movies
+                    filterMovies={filterMovies}
+                    onSaveMovie={handleSaveMovie}
+                    onDeleteMovie={handleDeleteMovie}
+                  />
+                }
               ></ProtectedRoute>
             }
           />
@@ -132,7 +245,13 @@ function App() {
             element={
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}
-                element={<SavedMovies />}
+                element={
+                  <Movies
+                    filterMovies={filterMovies}
+                    onSaveMovie={handleSaveMovie}
+                    onDeleteMovie={handleDeleteMovie}
+                  />
+                }
               ></ProtectedRoute>
             }
           />

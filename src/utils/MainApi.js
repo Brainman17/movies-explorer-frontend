@@ -51,7 +51,7 @@ class MainApi {
     }).then(this._checkResponse);
   };
 
-  createMovies = (data) => {
+  saveMovies = (data) => {
     return fetch(`${this._baseUrl}/movies`, {
       method: "POST",
       headers: this._headers,
