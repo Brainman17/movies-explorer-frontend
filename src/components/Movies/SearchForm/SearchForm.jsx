@@ -10,8 +10,8 @@ function SearchForm({ toggle, setToggle, pathname, onSearch }) {
 
   console.log(movies)
 
-  const [value, setValue] = useState('');
-  const filteredMovies = movies.filter(m => m.nameRu.toLowerCase().includes(value.toLowerCase()))
+  // const [value, setValue] = useState('');
+  // const filteredMovies = movies.filter(m => m.nameRu.toLowerCase().includes(value.toLowerCase()))
 
   const {
     handleSubmit,
@@ -67,7 +67,7 @@ function SearchForm({ toggle, setToggle, pathname, onSearch }) {
           required
           minLength="2"
           maxLength="30"
-          onChange={(evt) => setValue(evt.target.value)}
+          // onChange={(evt) => setValue(evt.target.value)}
           // value={}
         />
         <button className="search__btn">
