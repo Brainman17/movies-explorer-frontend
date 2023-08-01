@@ -99,7 +99,7 @@ function CardItem({ card, onSaveMovie, onDeleteMovie }) {
         className="card__image"
       />
       <div className="card__wrapper">
-        <p className="card__caption">{card.director}</p>
+        <p className="card__caption">{card.nameEN || card.nameRU}</p>
         <time className="card__time">
           {`${hours}ч`} {`${minutes}м`}
         </time>

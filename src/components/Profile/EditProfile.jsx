@@ -5,8 +5,8 @@ import Header from "../Header/Header";
 import "./Profile.css";
 import "../Register/Register.css";
 
-function EditProfile({ onUpdateUser, updateUserError }) {
-  const { currentUser } = useContext(CurrentUserContext);
+function EditProfile({ onUpdateUser }) {
+  const { isErrors, currentUser } = useContext(CurrentUserContext);
 
   const {
     register,
@@ -80,7 +80,9 @@ function EditProfile({ onUpdateUser, updateUserError }) {
               </span>
             )}
           </div>
-          <span className="profile__error">{updateUserError}</span>
+          {isErrors.user && (
+            <span className="profile__error">{isErrors.user}</span>
+          )}
           <button
             className={`profile__btn-save ${
               !isValid ? "auth__btn_type_disabled" : ""

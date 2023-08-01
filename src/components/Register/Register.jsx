@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import "./Register.css";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
+import { CurrentUserContext } from "../../utils/contexts";
 
-function Register({ onRegister, registerError }) {
+function Register({ onRegister }) {
+  const { isErrors } = useContext(CurrentUserContext);
   const {
     register,
     formState: { errors, isValid },
@@ -110,7 +112,11 @@ function Register({ onRegister, registerError }) {
           </div>
         </label>
         <div className="auth__btn_type_sign-up">
-          <span className="auth__errors_type_sign-up">{registerError}</span>
+          {isErrors.register && (
+            <span className="auth__errors_type_sign-up">
+              {isErrors.register}
+            </span>
+          )}
           <button
             type="submit"
             aria-label="Кнопка регистрации"

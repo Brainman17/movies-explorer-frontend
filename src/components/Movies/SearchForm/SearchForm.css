@@ -22,6 +22,7 @@
   border-radius: 50px;
   border: 1.5px solid rgba(170, 170, 170, 0.20000000298023224);
   padding: 7px 7px 7px 22px;
+  position: relative;
 }
 
 .search__input-txt {
@@ -42,6 +43,17 @@
 
 .search__input-txt:focus::placeholder {
   color: transparent;
+}
+
+.search__input-error{
+  margin-bottom: 10px;
+  display: block;
+  color: #FF004C;
+  font-weight: 400;
+  font-size: 12px;
+  text-align: center;
+  position: absolute;
+  top: 55px;
 }
 
 .search__btn {
