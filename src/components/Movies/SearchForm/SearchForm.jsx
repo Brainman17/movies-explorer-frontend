@@ -110,7 +110,7 @@ function SearchForm({ toggle, setToggle, pathname }) {
             className="switch__input"
             type="checkbox"
             checked={toggle[`toggle${name}`]}
-            onClick={onToggleSwitch}
+            onChange={onToggleSwitch}
           />
           <span className="switch__slider"></span>
         </label>

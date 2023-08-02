@@ -22,6 +22,8 @@ function MoviesCardList({ toggle, pathname, onSaveMovie, onDeleteMovie }) {
     setMoreMovies(countMovies[0]);
   }, [countMovies]);
 
+const ifSearchMovies = localStorage.getItem('searchMovie');
+
   return (
     <section className="card-list">
       {isLoading ? (
@@ -34,13 +36,13 @@ function MoviesCardList({ toggle, pathname, onSaveMovie, onDeleteMovie }) {
                 return (
                   <CardItem
                     card={card}
-                    key={card._id}
+                    key={card.id || card._id}
                     onSaveMovie={onSaveMovie}
                     onDeleteMovie={onDeleteMovie}
                   />
                 );
               })}
-            {movies.length === 0 && (
+            {(movies.length === 0 && ifSearchMovies) && (
               <span className="card-list__nothing-found">
                 Ничего не найдено
               </span>

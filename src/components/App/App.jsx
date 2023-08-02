@@ -72,8 +72,7 @@ function App() {
   }, [currentUser._id]);
 
   useEffect(() => {
-      cbTokenCheck()
-      
+    cbTokenCheck();
   }, []);
 
   const cbRegister = useCallback(async ({ name, email, password }) => {
@@ -108,7 +107,7 @@ function App() {
       }
       if (data.token !== undefined) {
         JSON.stringify(localStorage.setItem("jwt", data.token));
-        cbTokenCheck()
+        cbTokenCheck();
       }
     } catch (e) {
       console.error(e);
@@ -130,8 +129,8 @@ function App() {
       .then((user) => {
         setCurrentUser(user);
         setIsLoggedIn(true);
-        if(location === 'sign-in'){
-          navigate('/movies');
+        if (location === "sign-in") {
+          navigate("/movies");
         } else {
           navigate(location);
         }
