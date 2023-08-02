@@ -38,36 +38,43 @@ function App() {
   }, [savedMovies]);
 
   useEffect(() => {
-    setIsLoading(true);
-    const localSavedMovies = JSON.parse(localStorage.getItem("saveMovie"));
-    const arrayMovies = [moviesApi.getMovies()];
+    if (currentUser._id) {
+      setIsLoading(true);
+      const localSavedMovies = JSON.parse(localStorage.getItem("saveMovie"));
+      const arrayMovies = [moviesApi.getMovies()];
 
-    if (!localSavedMovies) {
-      arrayMovies.push(mainApi.getMovies());
-    }
-    Promise.all(arrayMovies).then(([movies, saved]) => {
-      const savedMovies = !saved ? localSavedMovies : saved.data;
-
-      const mySavedMovies = savedMovies.filter(
-        (movie) => movie.owner === currentUser._id
-      );
-      let newMovies = movies;
-      if (mySavedMovies) {
-        newMovies = movies.map((movie) => {
-          const currentMovie = mySavedMovies.find((savedMovie) => {
-            return savedMovie.movieId === movie.id;
-          });
-          if (currentMovie) {
-            movie._id = currentMovie._id;
-          }
-          return movie;
-        });
+      if (!localSavedMovies) {
+        arrayMovies.push(mainApi.getMovies());
       }
-      setMovies(newMovies);
-      setSavedMovies(mySavedMovies);
-      setIsLoading(false);
-    });
+      Promise.all(arrayMovies).then(([movies, saved]) => {
+        const savedMovies = !saved ? localSavedMovies : saved.data;
+
+        const mySavedMovies = savedMovies.filter(
+          (movie) => movie.owner === currentUser._id
+        );
+        let newMovies = movies;
+        if (mySavedMovies) {
+          newMovies = movies.map((movie) => {
+            const currentMovie = mySavedMovies.find((savedMovie) => {
+              return savedMovie.movieId === movie.id;
+            });
+            if (currentMovie) {
+              movie._id = currentMovie._id;
+            }
+            return movie;
+          });
+        }
+        setMovies(newMovies);
+        setSavedMovies(mySavedMovies);
+        setIsLoading(false);
+      });
+    }
   }, [currentUser._id]);
+
+  useEffect(() => {
+      cbTokenCheck()
+      
+  }, []);
 
   const cbRegister = useCallback(async ({ name, email, password }) => {
     try {
@@ -101,8 +108,7 @@ function App() {
       }
       if (data.token !== undefined) {
         JSON.stringify(localStorage.setItem("jwt", data.token));
-        setIsLoggedIn(true);
-        navigate("/movies");
+        cbTokenCheck()
       }
     } catch (e) {
       console.error(e);
@@ -124,14 +130,14 @@ function App() {
       .then((user) => {
         setCurrentUser(user);
         setIsLoggedIn(true);
-        navigate(location);
+        if(location === 'sign-in'){
+          navigate('/movies');
+        } else {
+          navigate(location);
+        }
       })
       .catch(console.error);
   }, []);
-
-  useEffect(() => {
-    cbTokenCheck();
-  }, [isLoggedIn]);
 
   function handleSaveMovie(data) {
     mainApi
@@ -190,7 +196,7 @@ function App() {
     localStorage.removeItem("searchMovie");
     localStorage.removeItem("searchSavedMovie");
     setIsLoggedIn(false);
-  }
+  };
 
   const setError = (error, name) => {
     setIsErrors((prev) => ({ ...prev, [name]: error }));
