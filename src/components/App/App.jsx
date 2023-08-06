@@ -279,7 +279,7 @@ function App() {
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}
                 element={<Profile onLogout={cbLogout} />}
-                link={"/sign-in"}
+                link={"/"}
               ></ProtectedRoute>
             }
           />
@@ -289,7 +289,7 @@ function App() {
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}
                 element={<EditProfile onUpdateUser={cbUpdateUser} />}
-                link={"/sign-in"}
+                link={"/"}
               />
             }
           />
