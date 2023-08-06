@@ -12,7 +12,7 @@ function EditProfile({ onUpdateUser }) {
 
   const {
     register,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isDirty },
     reset,
     handleSubmit,
   } = useForm({
@@ -90,9 +90,9 @@ function EditProfile({ onUpdateUser }) {
           )}
           <button
             className={`profile__btn-save ${
-              !isValid ? "auth__btn_type_disabled" : ""
+              (!isValid || !isDirty) ? "auth__btn_type_disabled" : ""
             }`}
-            disabled={!isValid}
+            disabled={!isValid || !isDirty}
           >
             Сохранить
           </button>
