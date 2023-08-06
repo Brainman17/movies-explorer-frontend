@@ -45,8 +45,6 @@ class MainApi {
   };
 
   getMovies = (jwt) => {
-
-    console.log('getMovies ', this._headers);
     return fetch(`${this._baseUrl}/movies`, {
       method: "GET",
       headers: {

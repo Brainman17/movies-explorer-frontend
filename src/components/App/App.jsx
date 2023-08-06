@@ -40,16 +40,16 @@ function App() {
   useEffect(() => {
     if (currentUser._id) {
       setIsLoading(true);
-      
+
       const localSavedMovies = JSON.parse(localStorage.getItem("saveMovie"));
       const arrayMovies = [moviesApi.getMovies()];
 
-      const jwt = localStorage.getItem("jwt")
-      
+      const jwt = localStorage.getItem("jwt");
+
       if (!localSavedMovies) {
         arrayMovies.push(mainApi.getMovies(jwt));
       }
-      
+
       Promise.all(arrayMovies).then(([movies, saved]) => {
         const savedMovies = !saved ? localSavedMovies : saved.data;
 
@@ -133,8 +133,11 @@ function App() {
       .then((user) => {
         setCurrentUser(user);
         setIsLoggedIn(true);
-        if (location.pathname === "/sign-in" || location.pathname === "/sign-up") {
-          navigate('/movies');
+        if (
+          location.pathname === "/sign-in" ||
+          location.pathname === "/sign-up"
+        ) {
+          navigate("/movies");
         } else {
           navigate(location);
         }
@@ -193,12 +196,6 @@ function App() {
   }, [navigate]);
 
   const reset = () => {
-    // localStorage.removeItem("jwt");
-    // localStorage.removeItem("saveMovie");
-    // localStorage.removeItem("toggleMovie");
-    // localStorage.removeItem("searchMovie");
-    // localStorage.removeItem("searchSavedMovie");
-    
     localStorage.clear();
     setMovies([]);
     setSavedMovies([]);
