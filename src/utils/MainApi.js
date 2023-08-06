@@ -44,10 +44,16 @@ class MainApi {
     }).then(this._checkResponse);
   };
 
-  getMovies = () => {
+  getMovies = (jwt) => {
+
+    console.log('getMovies ', this._headers);
     return fetch(`${this._baseUrl}/movies`, {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
     }).then(this._checkResponse);
   };
 

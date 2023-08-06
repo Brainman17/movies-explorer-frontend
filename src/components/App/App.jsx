@@ -40,12 +40,16 @@ function App() {
   useEffect(() => {
     if (currentUser._id) {
       setIsLoading(true);
+      
       const localSavedMovies = JSON.parse(localStorage.getItem("saveMovie"));
       const arrayMovies = [moviesApi.getMovies()];
 
+      const jwt = localStorage.getItem("jwt")
+      
       if (!localSavedMovies) {
-        arrayMovies.push(mainApi.getMovies());
+        arrayMovies.push(mainApi.getMovies(jwt));
       }
+      
       Promise.all(arrayMovies).then(([movies, saved]) => {
         const savedMovies = !saved ? localSavedMovies : saved.data;
 
@@ -69,7 +73,7 @@ function App() {
         setIsLoading(false);
       });
     }
-  }, [currentUser._id, isLoggedIn]);
+  }, [currentUser._id]);
 
   useEffect(() => {
     cbTokenCheck();
@@ -82,9 +86,6 @@ function App() {
         throw new Error(data.error);
       } else {
         cbLogin({ email, password });
-        
-        // setIsLoggedIn(true);
-        // navigate("/movies");
       }
     } catch (e) {
       console.error(e);
@@ -132,7 +133,6 @@ function App() {
       .then((user) => {
         setCurrentUser(user);
         setIsLoggedIn(true);
-        console.log(location);
         if (location.pathname === "/sign-in" || location.pathname === "/sign-up") {
           navigate('/movies');
         } else {
@@ -205,6 +205,7 @@ function App() {
     setFilterMovies([]);
     setFilterSavedMovies([]);
     setIsLoggedIn(false);
+    setCurrentUser({});
   };
 
   const setError = (error, name) => {
