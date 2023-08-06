@@ -81,8 +81,10 @@ function App() {
       if (!data) {
         throw new Error(data.error);
       } else {
-        setIsLoggedIn(true);
-        navigate("/movies");
+        cbLogin({ email, password });
+        
+        // setIsLoggedIn(true);
+        // navigate("/movies");
       }
     } catch (e) {
       console.error(e);
@@ -130,8 +132,9 @@ function App() {
       .then((user) => {
         setCurrentUser(user);
         setIsLoggedIn(true);
-        if (location === "sign-in") {
-          navigate("/movies");
+        console.log(location);
+        if (location.pathname === "/sign-in" || location.pathname === "/sign-up") {
+          navigate('/movies');
         } else {
           navigate(location);
         }
@@ -190,11 +193,17 @@ function App() {
   }, [navigate]);
 
   const reset = () => {
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("saveMovie");
-    localStorage.removeItem("toggleMovie");
-    localStorage.removeItem("searchMovie");
-    localStorage.removeItem("searchSavedMovie");
+    // localStorage.removeItem("jwt");
+    // localStorage.removeItem("saveMovie");
+    // localStorage.removeItem("toggleMovie");
+    // localStorage.removeItem("searchMovie");
+    // localStorage.removeItem("searchSavedMovie");
+    
+    localStorage.clear();
+    setMovies([]);
+    setSavedMovies([]);
+    setFilterMovies([]);
+    setFilterSavedMovies([]);
     setIsLoggedIn(false);
   };
 
