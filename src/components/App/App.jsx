@@ -81,7 +81,8 @@ function App() {
       if (!data) {
         throw new Error(data.error);
       } else {
-        navigate("/sign-in");
+        setIsLoggedIn(true);
+        navigate("/movies");
       }
     } catch (e) {
       console.error(e);
