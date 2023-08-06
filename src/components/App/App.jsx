@@ -69,7 +69,7 @@ function App() {
         setIsLoading(false);
       });
     }
-  }, [currentUser._id]);
+  }, [currentUser._id, isLoggedIn]);
 
   useEffect(() => {
     cbTokenCheck();
