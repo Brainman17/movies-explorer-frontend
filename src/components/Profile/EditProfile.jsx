@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import logo from "../../images/logo.svg";
 import { CurrentUserContext } from "../../utils/contexts";
 import Header from "../Header/Header";
 import "./Profile.css";
@@ -30,6 +32,9 @@ function EditProfile({ onUpdateUser }) {
     <>
       <Header />
       <section className="profile profile_type_edit">
+      <Link to="/">
+        <img src={logo} alt="Логотип" className="auth__logo auth__logo_edit-profile" />
+      </Link>
         <h2 className="profile__title">Привет, {currentUser.name}!</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="profile__wrapper profile__wrapper_type_edit">
