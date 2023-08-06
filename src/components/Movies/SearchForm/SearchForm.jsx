@@ -17,12 +17,14 @@ function SearchForm({ toggle, setToggle, pathname }) {
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
     setValue,
+    getValues
   } = useForm({
     mode: "onSubmit",
   });
+
 
   useEffect(() => {
     if (currentUser._id) {
@@ -67,7 +69,7 @@ function SearchForm({ toggle, setToggle, pathname }) {
     }
   }, [currentUser, movies, pathname, filteredMovies, setValue]);
 
-  const onToggleSwitch = () => {
+  const onToggleSwitch = (search) => {
     if (pathname === "/movies") {
       localStorage.setItem('toggleMovie', !toggle.toggleMovie);
     }
@@ -75,6 +77,7 @@ function SearchForm({ toggle, setToggle, pathname }) {
       ...prev,
       [`toggle${name}`]: !prev[`toggle${name}`],
     }));
+    isValid && onSubmit(getValues());
   };
 
   const onSubmit = ({ search }) => {
