@@ -253,7 +253,7 @@ function App() {
                     onDeleteMovie={handleDeleteMovie}
                   />
                 }
-                link={"/sign-in"}
+                link={"/"}
               ></ProtectedRoute>
             }
           />
@@ -269,7 +269,7 @@ function App() {
                     onDeleteMovie={handleDeleteMovie}
                   />
                 }
-                link={"/sign-in"}
+                link={"/"}
               ></ProtectedRoute>
             }
           />
@@ -299,7 +299,7 @@ function App() {
               <ProtectedRoute
                 isLoggedIn={!isLoggedIn}
                 element={<Register onRegister={cbRegister} />}
-                link={"/movies"}
+                link={"/"}
               />
             }
           />
@@ -309,7 +309,7 @@ function App() {
               <ProtectedRoute
                 isLoggedIn={!isLoggedIn}
                 element={<Login onLogin={cbLogin} />}
-                link={"/movies"}
+                link={"/"}
               />
             }
           />

@@ -25,7 +25,7 @@ function Profile({ onLogout }) {
         <Link to="/edit-profile" className="profile__btn-edit">
           Редактировать
         </Link>
-        <Link to="/sign-in" className="profile__btn-out" onClick={onLogout}>
+        <Link to="/" className="profile__btn-out" onClick={onLogout}>
           Выйти из аккаунта
         </Link>
       </section>
