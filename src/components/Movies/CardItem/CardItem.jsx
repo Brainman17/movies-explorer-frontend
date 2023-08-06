@@ -8,7 +8,6 @@ import "../MoviesCardList/MoviesCardList.css";
 function CardItem({ card, onSaveMovie, onDeleteMovie }) {
   const location = useLocation();
 
-  const [isHovering, setIsHovering] = useState(false);
   const [clicked, setClicked] = useState(true);
   const thumbnail = `${MOVIE_LINK}${card.image?.formats?.thumbnail?.url}`;
 
@@ -52,10 +51,8 @@ function CardItem({ card, onSaveMovie, onDeleteMovie }) {
   return (
     <article
       className="card"
-      onMouseOver={() => setIsHovering(true)}
-      onMouseOut={() => setIsHovering(false)}
     >
-      {location.pathname === "/movies" && isHovering ? (
+      {location.pathname === "/movies" ? (
         clicked ? (
           <button
             className="card__btn card__btn_type_save"
@@ -80,7 +77,7 @@ function CardItem({ card, onSaveMovie, onDeleteMovie }) {
       ) : (
         ""
       )}
-      {location.pathname === "/saved-movies" && isHovering ? (
+      {location.pathname === "/saved-movies" ? (
         <button className="card__btn card__btn_type_cross">
           <img
             src={cross}
