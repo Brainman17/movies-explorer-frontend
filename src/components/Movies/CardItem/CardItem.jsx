@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { MOVIE_LINK } from "../../../utils/constants";
 import check from "../../../images/check.svg";
 import cross from "../../../images/cross-card.svg";
@@ -49,9 +49,7 @@ function CardItem({ card, onSaveMovie, onDeleteMovie }) {
   }
 
   return (
-    <article
-      className="card"
-    >
+    <article className="card">
       {location.pathname === "/movies" ? (
         clicked ? (
           <button
@@ -90,11 +88,17 @@ function CardItem({ card, onSaveMovie, onDeleteMovie }) {
       ) : (
         ""
       )}
-      <img
-        src={location.pathname === '/saved-movies' ? `${card.image}` : `${MOVIE_LINK}${card.image?.url}`}
-        alt={card.nameRU}
-        className="card__image"
-      />
+      <Link to={card.trailerLink || card.trailer} target="_blank">
+        <img
+          src={
+            location.pathname === "/saved-movies"
+              ? `${card.image}`
+              : `${MOVIE_LINK}${card.image?.url}`
+          }
+          alt={card.nameRU}
+          className="card__image"
+        />
+      </Link>
       <div className="card__wrapper">
         <p className="card__caption">{card.nameEN || card.nameRU}</p>
         <time className="card__time">
