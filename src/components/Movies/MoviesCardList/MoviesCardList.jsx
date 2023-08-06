@@ -4,9 +4,11 @@ import CardItem from "../CardItem/CardItem";
 import Preloader from "../Preloader/Preloader";
 import { CurrentUserContext } from "../../../utils/contexts";
 import useCurrentWidth from "../../hooks/useCurrentWidth";
+import { MOVIE_DURATION } from "../../../utils/constants";
 
 function MoviesCardList({ toggle, pathname, onSaveMovie, onDeleteMovie }) {
-  const { isLoading, filterMovies, filterSavedMovies } = useContext(CurrentUserContext);
+  const { isLoading, filterMovies, filterSavedMovies } =
+    useContext(CurrentUserContext);
   const { countMovies } = useCurrentWidth();
   const [moreMovies, setMoreMovies] = useState(countMovies[0]);
 
@@ -15,14 +17,14 @@ function MoviesCardList({ toggle, pathname, onSaveMovie, onDeleteMovie }) {
   let movies = pathname === "/movies" ? filterMovies : filterSavedMovies;
 
   if (!isShortMovies) {
-    movies = movies.filter((movie) => movie.duration <= 40);
+    movies = movies.filter((movie) => movie.duration <= MOVIE_DURATION);
   }
 
   useEffect(() => {
     setMoreMovies(countMovies[0]);
   }, [countMovies]);
 
-const ifSearchMovies = localStorage.getItem('searchMovie');
+  const ifSearchMovies = localStorage.getItem("searchMovie");
 
   return (
     <section className="card-list">
@@ -42,7 +44,7 @@ const ifSearchMovies = localStorage.getItem('searchMovie');
                   />
                 );
               })}
-            {(movies.length === 0 && ifSearchMovies) && (
+            {movies.length === 0 && ifSearchMovies && (
               <span className="card-list__nothing-found">
                 Ничего не найдено
               </span>

@@ -8,3 +8,4 @@ export const INITIAL_MOVIES_TABLET = 8;
 export const SCREEN_SIZE_DESKTOP = 1024;
 export const INITIAL_MOVIES_DESTOP = 12;
 export const LOAD_MORE_DESKTOP = 3;
+export const MOVIE_DURATION = 40;
