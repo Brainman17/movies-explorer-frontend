@@ -15,6 +15,7 @@ function Header({ isLoggedIn }) {
       {(location.pathname === "/movies" ||
         location.pathname === "/saved-movies" ||
         location.pathname === "/profile" ||
+        location.pathname === "/edit-profile" ||
         location.pathname === "/") &&
       isLoggedIn === true ? (
         <header
