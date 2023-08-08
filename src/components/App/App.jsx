@@ -79,7 +79,7 @@ function App() {
     cbTokenCheck();
   }, []);
 
-  const cbRegister = useCallback(async ({ name, email, password }) => {
+  const cbRegister = (async ({ name, email, password }) => {
     try {
       const data = await mainApi.register(name, email, password);
       if (!data) {
@@ -101,9 +101,9 @@ function App() {
         );
       }
     }
-  }, []);
+  });
 
-  const cbLogin = useCallback(async ({ email, password }) => {
+  const cbLogin = (async ({ email, password }) => {
     try {
       const data = await mainApi.authorize(email, password);
       if (!data) {
@@ -121,7 +121,7 @@ function App() {
         return setError("При авторизации произошла ошибка", "login");
       }
     }
-  }, []);
+  });
 
   const cbTokenCheck = () => {
     const jwt = localStorage.getItem("jwt");
