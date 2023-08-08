@@ -3,13 +3,12 @@
 
 Адрес репозитория: https://github.com/Brainman17/movies-explorer-frontend.git
 
-## Ссылки на проект
+## Ссылка на проект
 
-Макет: https://disk.yandex.ru/d/BaE8G6v1CcHJEw
+https://ea.movies.explorer.nomoredomains.rocks
 
-IP-адрес 51.250.5.47
+## Ссылка на пул реквест
 
-Backend https://api.ea.movies.explorer.nomoredomains.rocks 
+https://github.com/Brainman17/movies-explorer-frontend/pull/2
 
-Frontend https://ea.movies.explorer.nomoredomains.rocks
 

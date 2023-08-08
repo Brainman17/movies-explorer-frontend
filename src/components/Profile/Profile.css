@@ -103,6 +103,10 @@
   opacity: 0.69;
 }
 
+.auth__logo_edit-profile {
+  margin-bottom: 30px;
+}
+
 .profile__error {
   display: block;
   margin-bottom: 10px;

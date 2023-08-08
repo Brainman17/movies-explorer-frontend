@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
+import { CurrentUserContext } from "../../utils/contexts";
 
-function Login({ onLogin, loginError }) {
+function Login({ onLogin }) {
+  const { isErrors } = useContext(CurrentUserContext);
+
   const {
     register,
     formState: { errors, isValid },
@@ -80,13 +83,13 @@ function Login({ onLogin, loginError }) {
           </div>
         </label>
         <div className="auth__btn_type_sign-in">
-          <span className="auth__errors_type_sign-in">{loginError}</span>
+          {isErrors.login && (
+            <span className="auth__errors_type_sign-in">{isErrors.login}</span>
+          )}
           <button
             type="submit"
             aria-label="Кнопка регистрации"
-            className={`auth__btn ${
-              !isValid ? "auth__btn_type_disabled" : ""
-            }`}
+            className={`auth__btn ${!isValid ? "auth__btn_type_disabled" : ""}`}
             disabled={!isValid}
           >
             Войти

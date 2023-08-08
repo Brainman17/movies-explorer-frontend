@@ -44,32 +44,48 @@ class MainApi {
     }).then(this._checkResponse);
   };
 
-  getMovies = () => {
+  getMovies = (jwt) => {
     return fetch(`${this._baseUrl}/movies`, {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
     }).then(this._checkResponse);
   };
 
-  saveMovies = (data) => {
+  saveMovies = (jwt, data) => {
     return fetch(`${this._baseUrl}/movies`, {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
       body: JSON.stringify(data),
     }).then(this._checkResponse);
   };
 
-  deleteMovies = (movieId) => {
+  deleteMovies = (jwt, movieId) => {
     return fetch(`${this._baseUrl}/movies/${movieId}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
     }).then(this._checkResponse);
   };
 
-  patchUsers(name, email) {
+  patchUsers(jwt, name, email) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
       body: JSON.stringify({
         name,
         email,

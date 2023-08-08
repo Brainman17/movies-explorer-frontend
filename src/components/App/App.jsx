@@ -21,11 +21,8 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-
-  // Серверные ошибки
-  const [loginError, setLoginError] = useState("");
-  const [registerError, setRegisterError] = useState("");
-  const [updateUserError, setUpdateUserError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isErrors, setIsErrors] = useState({});
 
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
@@ -34,87 +31,27 @@ function App() {
   const [filterSavedMovies, setFilterSavedMovies] = useState([]);
 
   useEffect(() => {
-    if (movies.length >= 0) {
-      setFilterMovies(movies);
-    }
-  }, [movies]);
-
-  useEffect(() => {
     // TODO delete
     if (savedMovies.length >= 0) {
       setFilterSavedMovies(savedMovies);
     }
   }, [savedMovies]);
 
-  const cbRegister = useCallback(async ({ name, email, password }) => {
-    try {
-      const data = await mainApi.register(name, email, password);
-      if (!data) {
-        throw new Error(data.error);
-      } else {
-        navigate("/sign-in");
-      }
-    } catch (e) {
-      console.error(e);
-      if (e === "Ошибка:( 409") {
-        return setRegisterError("Пользователь с таким email уже существует");
-      } else {
-        return setRegisterError(
-          "При регистрации пользователя произошла ошибка"
-        );
-      }
-    }
-  }, []);
-
-  const cbLogin = useCallback(async ({ email, password }) => {
-    try {
-      const data = await mainApi.authorize(email, password);
-      if (!data) {
-        throw new Error("Ошибка аутентификации");
-      }
-      if (data.token !== undefined) {
-        localStorage.setItem("jwt", data.token);
-        setIsLoggedIn(true);
-        navigate("/movies");
-      }
-    } catch (e) {
-      console.error(e);
-      if (e === "Ошибка:( 401") {
-        return setLoginError("Вы ввели неправильный логин или пароль");
-      } else {
-        return setLoginError("При авторизации произошла ошибка");
-      }
-    }
-  }, []);
-
-  const cbTokenCheck = useCallback(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (!jwt) {
-      return;
-    }
-    mainApi
-      .getUser(jwt)
-      .then((user) => {
-        setCurrentUser(user);
-        setIsLoggedIn(true);
-        navigate(location);
-      })
-      .catch(console.error);
-  }, []);
-
   useEffect(() => {
     if (currentUser._id) {
-      const localSavedMovies = JSON.parse(
-        localStorage.getItem(`saveMovie_${currentUser._id}`)
-      );
+      setIsLoading(true);
+
+      const localSavedMovies = JSON.parse(localStorage.getItem("saveMovie"));
       const arrayMovies = [moviesApi.getMovies()];
 
+      const jwt = localStorage.getItem("jwt");
+
       if (!localSavedMovies) {
-        arrayMovies.push(mainApi.getMovies());
+        arrayMovies.push(mainApi.getMovies(jwt));
       }
+
       Promise.all(arrayMovies).then(([movies, saved]) => {
         const savedMovies = !saved ? localSavedMovies : saved.data;
-        // console.log("savedMovies ", savedMovies);
 
         const mySavedMovies = savedMovies.filter(
           (movie) => movie.owner === currentUser._id
@@ -133,22 +70,89 @@ function App() {
         }
         setMovies(newMovies);
         setSavedMovies(mySavedMovies);
+        setIsLoading(false);
       });
     }
-  }, [currentUser]);
+  }, [currentUser._id]);
+
+  useEffect(() => {
+    cbTokenCheck();
+  }, []);
+
+  const cbRegister = (async ({ name, email, password }) => {
+    try {
+      const data = await mainApi.register(name, email, password);
+      if (!data) {
+        throw new Error(data.error);
+      } else {
+        cbLogin({ email, password });
+      }
+    } catch (e) {
+      console.error(e);
+      if (e === "Ошибка:( 409") {
+        return setError(
+          "Пользователь с таким email уже существует",
+          "register"
+        );
+      } else {
+        return setError(
+          "При регистрации пользователя произошла ошибка",
+          "register"
+        );
+      }
+    }
+  });
+
+  const cbLogin = (async ({ email, password }) => {
+    try {
+      const data = await mainApi.authorize(email, password);
+      if (!data) {
+        throw new Error("Ошибка аутентификации");
+      }
+      if (data.token !== undefined) {
+        JSON.stringify(localStorage.setItem("jwt", data.token));
+        cbTokenCheck();
+      }
+    } catch (e) {
+      console.error(e);
+      if (e === "Ошибка:( 401") {
+        return setError("Вы ввели неправильный логин или пароль", "login");
+      } else {
+        return setError("При авторизации произошла ошибка", "login");
+      }
+    }
+  });
+
+  const cbTokenCheck = () => {
+    const jwt = localStorage.getItem("jwt");
+    if (!jwt) {
+      return;
+    }
+    mainApi
+      .getUser(jwt)
+      .then((user) => {
+        setCurrentUser(user);
+        setIsLoggedIn(true);
+        if (
+          location.pathname === "/sign-in" ||
+          location.pathname === "/sign-up"
+        ) { 
+          navigate("/movies");
+        } else {
+          navigate(location);
+        }
+      })
+      .catch(console.error);
+  };
 
   function handleSaveMovie(data) {
-    // console.log("data =>", data)
+    const jwt = localStorage.getItem("jwt");
     mainApi
-      .saveMovies(data)
+      .saveMovies(jwt, data)
       .then(({ data: movie }) => {
         setSavedMovies((prev) => {
           const data = [movie, ...prev];
-          // console.log('data =>',data)
-          localStorage.setItem(
-            `saveMovie_${currentUser._id}`,
-            JSON.stringify(data)
-          );
+          localStorage.setItem("saveMovie", JSON.stringify(data));
           return data;
         });
         setMovies((prev) =>
@@ -164,17 +168,15 @@ function App() {
   }
 
   function handleDeleteMovie(id) {
+    const jwt = localStorage.getItem("jwt");
     mainApi
-      .deleteMovies(id)
+      .deleteMovies(jwt, id)
       .then(() => {
         setSavedMovies((savedMovies) => {
           const data = savedMovies.filter(
             (savedMovie) => savedMovie._id !== id
           );
-          localStorage.setItem(
-            `saveMovie_${currentUser._id}`,
-            JSON.stringify(data)
-          );
+          localStorage.setItem("saveMovie", JSON.stringify(data));
           return data;
         });
         const newMovies = movies.map((item) => {
@@ -189,37 +191,62 @@ function App() {
       .catch(console.error);
   }
 
-
-  useEffect(() => {
-    cbTokenCheck();
-  }, [isLoggedIn]);
-
-  const cbLogout = useCallback(() => {
-    setIsLoggedIn(false);
-    navigate("/sign-in");
-    localStorage.removeItem("jwt");
-  }, []);
-
   const cbUpdateUser = useCallback(async ({ name, email }) => {
     try {
-      const user = await mainApi.patchUsers(name, email);
-
+      const jwt = localStorage.getItem("jwt");
+      const user = await mainApi.patchUsers(jwt, name, email);
       setCurrentUser(user.data);
       setIsLoggedIn(true);
       navigate("/profile");
     } catch (e) {
       console.error(e);
       if (e === "Ошибка:( 409") {
-        return setUpdateUserError("Пользователь с таким email уже существует");
+        setError("Пользователь с таким email уже существует", "user");
       } else {
-        return setUpdateUserError("При обновлении профиля произошла ошибка");
+        setError("При обновлении профиля произошла ошибка", "user");
       }
     }
   }, []);
 
+  const cbLogout = useCallback(() => {
+    setIsLoggedIn(false);
+    navigate("/sign-in");
+    reset();
+  }, [navigate]);
+
+  const reset = () => {
+    localStorage.clear();
+    setMovies([]);
+    setSavedMovies([]);
+    setFilterMovies([]);
+    setFilterSavedMovies([]);
+    setIsLoggedIn(false);
+    setCurrentUser({});
+  };
+
+  const setError = (error, name) => {
+    setIsErrors((prev) => ({ ...prev, [name]: error }));
+    setTimeout(() => {
+      setIsErrors((prev) => {
+        delete prev[name];
+        return { ...prev };
+      });
+    }, 3000);
+  };
+
   return (
     <CurrentUserContext.Provider
-      value={{ movies, savedMovies, setFilterSavedMovies, setFilterMovies, currentUser, filterMovies, filterSavedMovies }}
+      value={{
+        isErrors,
+        isLoading,
+        movies,
+        savedMovies,
+        setFilterSavedMovies,
+        setFilterMovies,
+        currentUser,
+        filterMovies,
+        filterSavedMovies,
+      }}
     >
       <div className="page">
         <Header isLoggedIn={isLoggedIn} />
@@ -237,6 +264,7 @@ function App() {
                     onDeleteMovie={handleDeleteMovie}
                   />
                 }
+                link={"/"}
               ></ProtectedRoute>
             }
           />
@@ -252,6 +280,7 @@ function App() {
                     onDeleteMovie={handleDeleteMovie}
                   />
                 }
+                link={"/"}
               ></ProtectedRoute>
             }
           />
@@ -261,6 +290,7 @@ function App() {
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}
                 element={<Profile onLogout={cbLogout} />}
+                link={"/"}
               ></ProtectedRoute>
             }
           />
@@ -269,24 +299,30 @@ function App() {
             element={
               <ProtectedRoute
                 isLoggedIn={isLoggedIn}
-                element={
-                  <EditProfile
-                    updateUserError={updateUserError}
-                    onUpdateUser={cbUpdateUser}
-                  />
-                }
+                element={<EditProfile onUpdateUser={cbUpdateUser} />}
+                link={"/"}
               />
             }
           />
           <Route
             path="/sign-up"
             element={
-              <Register onRegister={cbRegister} registerError={registerError} />
+              <ProtectedRoute
+                isLoggedIn={!isLoggedIn}
+                element={<Register onRegister={cbRegister} />}
+                link={"/"}
+              />
             }
           />
           <Route
             path="/sign-in"
-            element={<Login onLogin={cbLogin} loginError={loginError} />}
+            element={
+              <ProtectedRoute
+                isLoggedIn={!isLoggedIn}
+                element={<Login onLogin={cbLogin} />}
+                link={"/"}
+              />
+            }
           />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

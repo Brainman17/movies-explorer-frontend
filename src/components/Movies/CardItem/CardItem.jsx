@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { MOVIE_LINK } from "../../../utils/constants";
 import check from "../../../images/check.svg";
 import cross from "../../../images/cross-card.svg";
@@ -8,7 +8,6 @@ import "../MoviesCardList/MoviesCardList.css";
 function CardItem({ card, onSaveMovie, onDeleteMovie }) {
   const location = useLocation();
 
-  const [isHovering, setIsHovering] = useState(false);
   const [clicked, setClicked] = useState(true);
   const thumbnail = `${MOVIE_LINK}${card.image?.formats?.thumbnail?.url}`;
 
@@ -50,12 +49,8 @@ function CardItem({ card, onSaveMovie, onDeleteMovie }) {
   }
 
   return (
-    <article
-      className="card"
-      onMouseOver={() => setIsHovering(true)}
-      onMouseOut={() => setIsHovering(false)}
-    >
-      {location.pathname === "/movies" && isHovering ? (
+    <article className="card">
+      {location.pathname === "/movies" ? (
         clicked ? (
           <button
             className="card__btn card__btn_type_save"
@@ -80,7 +75,7 @@ function CardItem({ card, onSaveMovie, onDeleteMovie }) {
       ) : (
         ""
       )}
-      {location.pathname === "/saved-movies" && isHovering ? (
+      {location.pathname === "/saved-movies" ? (
         <button className="card__btn card__btn_type_cross">
           <img
             src={cross}
@@ -93,13 +88,19 @@ function CardItem({ card, onSaveMovie, onDeleteMovie }) {
       ) : (
         ""
       )}
-      <img
-        src={location.pathname === '/saved-movies' ? `${card.image}` : `${MOVIE_LINK}${card.image?.url}`}
-        alt={card.nameRU}
-        className="card__image"
-      />
+      <Link to={card.trailerLink || card.trailer} target="_blank">
+        <img
+          src={
+            location.pathname === "/saved-movies"
+              ? `${card.image}`
+              : `${MOVIE_LINK}${card.image?.url}`
+          }
+          alt={card.nameRU}
+          className="card__image"
+        />
+      </Link>
       <div className="card__wrapper">
-        <p className="card__caption">{card.director}</p>
+        <p className="card__caption">{card.nameEN || card.nameRU}</p>
         <time className="card__time">
           {`${hours}ч`} {`${minutes}м`}
         </time>
