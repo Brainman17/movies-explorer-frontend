@@ -123,7 +123,7 @@ function App() {
     }
   }, []);
 
-  const cbTokenCheck = useCallback(() => {
+  const cbTokenCheck = () => {
     const jwt = localStorage.getItem("jwt");
     if (!jwt) {
       return;
@@ -136,18 +136,19 @@ function App() {
         if (
           location.pathname === "/sign-in" ||
           location.pathname === "/sign-up"
-        ) {
+        ) { 
           navigate("/movies");
         } else {
           navigate(location);
         }
       })
       .catch(console.error);
-  }, []);
+  };
 
   function handleSaveMovie(data) {
+    const jwt = localStorage.getItem("jwt");
     mainApi
-      .saveMovies(data)
+      .saveMovies(jwt, data)
       .then(({ data: movie }) => {
         setSavedMovies((prev) => {
           const data = [movie, ...prev];
@@ -167,8 +168,9 @@ function App() {
   }
 
   function handleDeleteMovie(id) {
+    const jwt = localStorage.getItem("jwt");
     mainApi
-      .deleteMovies(id)
+      .deleteMovies(jwt, id)
       .then(() => {
         setSavedMovies((savedMovies) => {
           const data = savedMovies.filter(
@@ -188,6 +190,23 @@ function App() {
       })
       .catch(console.error);
   }
+
+  const cbUpdateUser = useCallback(async ({ name, email }) => {
+    try {
+      const jwt = localStorage.getItem("jwt");
+      const user = await mainApi.patchUsers(jwt, name, email);
+      setCurrentUser(user.data);
+      setIsLoggedIn(true);
+      navigate("/profile");
+    } catch (e) {
+      console.error(e);
+      if (e === "Ошибка:( 409") {
+        setError("Пользователь с таким email уже существует", "user");
+      } else {
+        setError("При обновлении профиля произошла ошибка", "user");
+      }
+    }
+  }, []);
 
   const cbLogout = useCallback(() => {
     setIsLoggedIn(false);
@@ -214,22 +233,6 @@ function App() {
       });
     }, 3000);
   };
-
-  const cbUpdateUser = useCallback(async ({ name, email }) => {
-    try {
-      const user = await mainApi.patchUsers(name, email);
-      setCurrentUser(user.data);
-      setIsLoggedIn(true);
-      navigate("/profile");
-    } catch (e) {
-      console.error(e);
-      if (e === "Ошибка:( 409") {
-        setError("Пользователь с таким email уже существует", "user");
-      } else {
-        setError("При обновлении профиля произошла ошибка", "user");
-      }
-    }
-  }, []);
 
   return (
     <CurrentUserContext.Provider
