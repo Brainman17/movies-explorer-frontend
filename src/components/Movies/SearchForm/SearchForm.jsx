@@ -25,7 +25,6 @@ function SearchForm({ toggle, setToggle, pathname }) {
     mode: "onSubmit",
   });
 
-
   useEffect(() => {
     if (currentUser._id) {
       const toggleMovie = localStorage.getItem('toggleMovie');
@@ -65,6 +64,8 @@ function SearchForm({ toggle, setToggle, pathname }) {
           setValue("search", movies);
           filteredMovies(movies);
         }
+      } else {
+        setValue('search', '')
       }
     }
   }, [currentUser, movies, pathname, filteredMovies, setValue]);
